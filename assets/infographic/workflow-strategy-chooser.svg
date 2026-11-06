@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 460" width="940" height="460" role="img" aria-label="A chooser matching team shipping patterns to Git Flow, GitHub Flow, trunk-based development, or stacked PRs">
+  <title>Which branching strategy?</title>
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.09"/>
+    </pattern>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#38bdf8"/></marker>
+    <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#34d399"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fb7185"/></marker>
+    <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c084fc"/></marker>
+  </defs>
+  <style>
+  text{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;dominant-baseline:middle}
+  .title{fill:#e2e8f0;font-size:17px;font-weight:700;dominant-baseline:auto}
+  .sub{fill:#94a3b8;font-size:12px;dominant-baseline:auto}
+  .lbl{fill:#94a3b8;font-size:11px;text-anchor:middle}
+  .lbl-l{fill:#94a3b8;font-size:11px}
+  .val{fill:#e2e8f0;font-size:13px;text-anchor:middle;font-weight:600}
+  .tiny{fill:#94a3b8;font-size:9.5px;text-anchor:middle}
+  .step{fill:#fbbf24;font-size:12px;font-weight:700}
+  .road{stroke-linecap:round;fill:none}
+  .dot{fill:#fff;stroke-width:3}
+  .tag{font-size:10px;font-weight:700;text-anchor:middle}
+  
+  </style>
+  <rect x="0" y="0" width="940" height="460" rx="14" fill="#0b1c2c"/>
+  <rect x="0" y="0" width="940" height="460" rx="14" fill="url(#g)"/>
+  <rect x="0.75" y="0.75" width="938.5" height="458.5" rx="13.5" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.35"/>
+  <text class="title" x="24" y="34">Which branching strategy?</text>
+  <text class="sub" x="24" y="54">The commands are identical everywhere — only the agreed-upon shape differs</text>
+<text class="lbl-l" x="24" y="96" >pick based on how you ship, not on habit</text>
+<text class="lbl-l" x="80" y="140" text-anchor="start" >Dated, versioned releases (desktop/mobile/firmware)</text>
+<rect x="640" y="120" width="240" height="36" rx="7" fill="#34d399" fill-opacity="0.1" stroke="#34d399" stroke-width="1.8"/>
+<text class="val" x="760.0" y="138.0" text-anchor="middle" >Git Flow</text>
+<text class="lbl-l" x="80" y="214" text-anchor="start" >Continuous deploy, want the simplest model</text>
+<rect x="640" y="194" width="240" height="36" rx="7" fill="#fbbf24" fill-opacity="0.1" stroke="#fbbf24" stroke-width="1.8"/>
+<text class="val" x="760.0" y="212.0" text-anchor="middle" >GitHub Flow</text>
+<text class="lbl-l" x="80" y="288" text-anchor="start" >Strong CI/tests, want to minimize merge pain entirely</text>
+<rect x="640" y="268" width="240" height="36" rx="7" fill="#38bdf8" fill-opacity="0.1" stroke="#38bdf8" stroke-width="1.8"/>
+<text class="val" x="760.0" y="286.0" text-anchor="middle" >Trunk-Based + flags</text>
+<text class="lbl-l" x="80" y="362" text-anchor="start" >One big change that splits into reviewable, dependent pieces</text>
+<rect x="640" y="342" width="240" height="36" rx="7" fill="#fb7185" fill-opacity="0.1" stroke="#fb7185" stroke-width="1.8"/>
+<text class="val" x="760.0" y="360.0" text-anchor="middle" >Stacked PRs</text></svg>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 240" width="720" height="240" role="img" aria-label="Animation: pushing a new stash entry inserts it at stash@{0} and shifts every existing entry down by one index">
+  <title>The stash list is a LIFO stack</title>
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.09"/>
+    </pattern>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#38bdf8"/></marker>
+    <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#34d399"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fb7185"/></marker>
+    <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c084fc"/></marker>
+  </defs>
+  <style>
+  text{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;dominant-baseline:middle}
+  .title{fill:#e2e8f0;font-size:17px;font-weight:700;dominant-baseline:auto}
+  .sub{fill:#94a3b8;font-size:12px;dominant-baseline:auto}
+  .lbl{fill:#94a3b8;font-size:11px;text-anchor:middle}
+  .lbl-l{fill:#94a3b8;font-size:11px}
+  .val{fill:#e2e8f0;font-size:13px;text-anchor:middle;font-weight:600}
+  .tiny{fill:#94a3b8;font-size:9.5px;text-anchor:middle}
+  .step{fill:#fbbf24;font-size:12px;font-weight:700}
+  .road{stroke-linecap:round;fill:none}
+  .dot{fill:#fff;stroke-width:3}
+  .tag{font-size:10px;font-weight:700;text-anchor:middle}
+  
+  #row0{animation:r0 6s infinite}
+  #row1{animation:r1 6s infinite}
+  #row2{animation:r2 6s infinite}
+  .newrow{opacity:0;animation:nr 6s infinite}
+  @keyframes r0{0%{transform:translateY(0)}46%{transform:translateY(0)}54%{transform:translateY(50px)}100%{transform:translateY(50px)}}
+  @keyframes r1{0%{transform:translateY(0)}46%{transform:translateY(0)}54%{transform:translateY(50px)}100%{transform:translateY(50px)}}
+  @keyframes r2{0%{opacity:1}46%{opacity:1}54%{opacity:0}100%{opacity:0}}
+  @keyframes nr{0%{opacity:0}50%{opacity:0}58%{opacity:1}100%{opacity:1}}
+
+  </style>
+  <rect x="0" y="0" width="720" height="240" rx="14" fill="#0b1c2c"/>
+  <rect x="0" y="0" width="720" height="240" rx="14" fill="url(#g)"/>
+  <rect x="0.75" y="0.75" width="718.5" height="238.5" rx="13.5" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.35"/>
+  <text class="title" x="24" y="34">The stash list is a LIFO stack</text>
+  <text class="sub" x="24" y="54">A new push shoves every older entry down one slot</text>
+<text class="lbl-l" x="24" y="40" >newest stash is always stash@{0} — each new push shoves the stack down</text>
+<g id="row0" class="e0"><rect x="260" y="80" width="150" height="30" rx="15.0" fill="#fbbf24" fill-opacity="0.15" stroke="#fbbf24" stroke-width="1.6"/><text class="tag" x="335.0" y="96.0" fill="#fbbf24">stash@{0}</text></g>
+<g id="row1" ><rect x="260" y="130" width="150" height="30" rx="15.0" fill="#38bdf8" fill-opacity="0.15" stroke="#38bdf8" stroke-width="1.6"/><text class="tag" x="335.0" y="146.0" fill="#38bdf8">stash@{1}</text></g>
+<g id="row2" ><rect x="260" y="180" width="150" height="30" rx="15.0" fill="#c084fc" fill-opacity="0.15" stroke="#c084fc" stroke-width="1.6"/><text class="tag" x="335.0" y="196.0" fill="#c084fc">stash@{2}</text></g>
+<g id="newrow" class="newrow"><rect x="260" y="80" width="150" height="30" rx="15.0" fill="#34d399" fill-opacity="0.15" stroke="#34d399" stroke-width="1.6"/><text class="tag" x="335.0" y="96.0" fill="#34d399">stash@{0} "new!"</text></g></svg>

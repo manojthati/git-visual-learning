@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 400" width="880" height="400" role="img" aria-label="Blueprint: bisect, worktree, rerere and the archaeology tools (blame, log -S, hooks), side by side">
+  <title>The Advanced Toolbox — anatomy</title>
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.09"/>
+    </pattern>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#38bdf8"/></marker>
+    <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#34d399"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fb7185"/></marker>
+    <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c084fc"/></marker>
+  </defs>
+  <style>
+  text{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;dominant-baseline:middle}
+  .title{fill:#e2e8f0;font-size:17px;font-weight:700;dominant-baseline:auto}
+  .sub{fill:#94a3b8;font-size:12px;dominant-baseline:auto}
+  .lbl{fill:#94a3b8;font-size:11px;text-anchor:middle}
+  .lbl-l{fill:#94a3b8;font-size:11px}
+  .val{fill:#e2e8f0;font-size:13px;text-anchor:middle;font-weight:600}
+  .tiny{fill:#94a3b8;font-size:9.5px;text-anchor:middle}
+  .step{fill:#fbbf24;font-size:12px;font-weight:700}
+  .road{stroke-linecap:round;fill:none}
+  .dot{fill:#fff;stroke-width:3}
+  .tag{font-size:10px;font-weight:700;text-anchor:middle}
+  
+  </style>
+  <rect x="0" y="0" width="880" height="400" rx="14" fill="#0b1c2c"/>
+  <rect x="0" y="0" width="880" height="400" rx="14" fill="url(#g)"/>
+  <rect x="0.75" y="0.75" width="878.5" height="398.5" rx="13.5" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.35"/>
+  <text class="title" x="24" y="34">The Advanced Toolbox — anatomy</text>
+  <text class="sub" x="24" y="54">The tools that earn their keep once history and the team both get large</text>
+<text class="lbl-l" x="24" y="96" >four tools that earn their keep once a team and a history both get large</text>
+<rect x="60" y="140" width="220" height="100" rx="8" fill="#38bdf8" fill-opacity="0.08" stroke="#38bdf8" stroke-width="2"/>
+<text class="val" x="170.0" y="182.0" text-anchor="middle" >git bisect</text>
+<text class="tiny" x="170.0" y="204.0" text-anchor="middle" >binary-search commits for a regression</text>
+<rect x="330" y="140" width="220" height="100" rx="8" fill="#fbbf24" fill-opacity="0.08" stroke="#fbbf24" stroke-width="2"/>
+<text class="val" x="440.0" y="182.0" text-anchor="middle" >git worktree</text>
+<text class="tiny" x="440.0" y="204.0" text-anchor="middle" >several branches checked out at once</text>
+<rect x="600" y="140" width="220" height="100" rx="8" fill="#34d399" fill-opacity="0.08" stroke="#34d399" stroke-width="2"/>
+<text class="val" x="710.0" y="182.0" text-anchor="middle" >git rerere</text>
+<text class="tiny" x="710.0" y="204.0" text-anchor="middle" >remembers conflict resolutions, replays them</text>
+<rect x="330" y="270" width="220" height="100" rx="8" fill="#c084fc" fill-opacity="0.08" stroke="#c084fc" stroke-width="2"/>
+<text class="val" x="440.0" y="312.0" text-anchor="middle" >hooks + blame + log -S</text>
+<text class="tiny" x="440.0" y="334.0" text-anchor="middle" >automation, authorship, archaeology</text>
+<text class="lbl-l" x="440" y="370" text-anchor="middle" >bisect finds the culprit in O(log n) steps · worktree needs no stashing to context-switch · rerere shines in long rebases</text></svg>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 420" width="880" height="420" role="img" aria-label="Blueprint: a four-deep stack of branches, each starting where the previous one currently ends">
+  <title>Stacked Branches — anatomy</title>
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.09"/>
+    </pattern>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#38bdf8"/></marker>
+    <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#34d399"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fb7185"/></marker>
+    <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c084fc"/></marker>
+  </defs>
+  <style>
+  text{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;dominant-baseline:middle}
+  .title{fill:#e2e8f0;font-size:17px;font-weight:700;dominant-baseline:auto}
+  .sub{fill:#94a3b8;font-size:12px;dominant-baseline:auto}
+  .lbl{fill:#94a3b8;font-size:11px;text-anchor:middle}
+  .lbl-l{fill:#94a3b8;font-size:11px}
+  .val{fill:#e2e8f0;font-size:13px;text-anchor:middle;font-weight:600}
+  .tiny{fill:#94a3b8;font-size:9.5px;text-anchor:middle}
+  .step{fill:#fbbf24;font-size:12px;font-weight:700}
+  .road{stroke-linecap:round;fill:none}
+  .dot{fill:#fff;stroke-width:3}
+  .tag{font-size:10px;font-weight:700;text-anchor:middle}
+  
+  </style>
+  <rect x="0" y="0" width="880" height="420" rx="14" fill="#0b1c2c"/>
+  <rect x="0" y="0" width="880" height="420" rx="14" fill="url(#g)"/>
+  <rect x="0.75" y="0.75" width="878.5" height="418.5" rx="13.5" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.35"/>
+  <text class="title" x="24" y="34">Stacked Branches — anatomy</text>
+  <text class="sub" x="24" y="54">Each branch forks from the tip of the one below it, not from main</text>
+<text class="lbl-l" x="24" y="96" >a stack is just branches chained tip-to-tip instead of all forking independently from main</text>
+<circle class="dot" cx="120" cy="330" r="7" stroke="#34d399" stroke-width="3"/>
+<rect x="140" y="318" width="100" height="22" rx="11.0" fill="#34d399" fill-opacity="0.15" stroke="#34d399" stroke-width="1.6"/><text class="tag" x="190.0" y="330.0" fill="#34d399">main</text>
+<path class="road" d="M120,330 C 210,330 210,270 300,270" stroke="#fbbf24" stroke-width="12"/>
+<circle class="dot" cx="300" cy="270" r="7" stroke="#fbbf24" stroke-width="3"/>
+<rect x="320" y="258" width="100" height="22" rx="11.0" fill="#fbbf24" fill-opacity="0.15" stroke="#fbbf24" stroke-width="1.6"/><text class="tag" x="370.0" y="270.0" fill="#fbbf24">feature-A</text>
+<path class="road" d="M300,270 C 390,270 390,210 480,210" stroke="#38bdf8" stroke-width="12"/>
+<circle class="dot" cx="480" cy="210" r="7" stroke="#38bdf8" stroke-width="3"/>
+<rect x="500" y="198" width="100" height="22" rx="11.0" fill="#38bdf8" fill-opacity="0.15" stroke="#38bdf8" stroke-width="1.6"/><text class="tag" x="550.0" y="210.0" fill="#38bdf8">feature-B</text>
+<path class="road" d="M480,210 C 570,210 570,150 660,150" stroke="#fb7185" stroke-width="12"/>
+<circle class="dot" cx="660" cy="150" r="7" stroke="#fb7185" stroke-width="3"/>
+<rect x="680" y="138" width="100" height="22" rx="11.0" fill="#fb7185" fill-opacity="0.15" stroke="#fb7185" stroke-width="1.6"/><text class="tag" x="730.0" y="150.0" fill="#fb7185">feature-C</text>
+<text class="lbl-l" x="440" y="370" text-anchor="middle" >merging an inner branch (e.g. folding B into A) strands everything above it (C) on a now-orphaned base</text>
+<text class="lbl-l" x="440" y="395" text-anchor="middle" >fix: git rebase --onto &lt;new-base&gt; &lt;old-base&gt; &lt;branch&gt;, applied bottom to top across the whole stack</text></svg>

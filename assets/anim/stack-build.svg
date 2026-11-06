@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280" width="720" height="280" role="img" aria-label="Animation: feature-A, feature-B and feature-C are created one on top of the next, each branching from the previous branch's tip">
+  <title>Building a stack of branches</title>
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.09"/>
+    </pattern>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#38bdf8"/></marker>
+    <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#34d399"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fb7185"/></marker>
+    <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c084fc"/></marker>
+  </defs>
+  <style>
+  text{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;dominant-baseline:middle}
+  .title{fill:#e2e8f0;font-size:17px;font-weight:700;dominant-baseline:auto}
+  .sub{fill:#94a3b8;font-size:12px;dominant-baseline:auto}
+  .lbl{fill:#94a3b8;font-size:11px;text-anchor:middle}
+  .lbl-l{fill:#94a3b8;font-size:11px}
+  .val{fill:#e2e8f0;font-size:13px;text-anchor:middle;font-weight:600}
+  .tiny{fill:#94a3b8;font-size:9.5px;text-anchor:middle}
+  .step{fill:#fbbf24;font-size:12px;font-weight:700}
+  .road{stroke-linecap:round;fill:none}
+  .dot{fill:#fff;stroke-width:3}
+  .tag{font-size:10px;font-weight:700;text-anchor:middle}
+  
+  .seg1{opacity:0;animation:s1 8s infinite}
+  .seg2{opacity:0;animation:s2 8s infinite}
+  .seg3{opacity:0;animation:s3 8s infinite}
+  @keyframes s1{0%{opacity:0}6%{opacity:0}16%{opacity:1}100%{opacity:1}}
+  @keyframes s2{0%{opacity:0}30%{opacity:0}40%{opacity:1}100%{opacity:1}}
+  @keyframes s3{0%{opacity:0}54%{opacity:0}64%{opacity:1}100%{opacity:1}}
+
+  </style>
+  <rect x="0" y="0" width="720" height="280" rx="14" fill="#0b1c2c"/>
+  <rect x="0" y="0" width="720" height="280" rx="14" fill="url(#g)"/>
+  <rect x="0.75" y="0.75" width="718.5" height="278.5" rx="13.5" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.35"/>
+  <text class="title" x="24" y="34">Building a stack of branches</text>
+  <text class="sub" x="24" y="54">Each branch forks from the tip of the one below it</text>
+<circle class="dot" cx="100" cy="230" r="7" stroke="#34d399" stroke-width="3"/>
+<rect x="120" y="218" width="100" height="22" rx="11.0" fill="#34d399" fill-opacity="0.15" stroke="#34d399" stroke-width="1.6"/><text class="tag" x="170.0" y="230.0" fill="#34d399">main</text>
+<g class="seg seg1"><path class="road" d="M100,230 C 160,230 160,180 220,180" stroke="#fbbf24" stroke-width="13"/></g>
+<circle class="dot" cx="280" cy="180" r="7" stroke="#fbbf24" stroke-width="3"/>
+<rect x="300" y="168" width="100" height="22" rx="11.0" fill="#fbbf24" fill-opacity="0.15" stroke="#fbbf24" stroke-width="1.6"/><text class="tag" x="350.0" y="180.0" fill="#fbbf24">feature-A</text>
+<g class="seg seg2"><path class="road" d="M280,180 C 340,180 340,130 400,130" stroke="#38bdf8" stroke-width="13"/></g>
+<circle class="dot" cx="460" cy="130" r="7" stroke="#38bdf8" stroke-width="3"/>
+<rect x="480" y="118" width="100" height="22" rx="11.0" fill="#38bdf8" fill-opacity="0.15" stroke="#38bdf8" stroke-width="1.6"/><text class="tag" x="530.0" y="130.0" fill="#38bdf8">feature-B</text>
+<g class="seg seg3"><path class="road" d="M460,130 C 510,130 510,80 560,80" stroke="#fb7185" stroke-width="13"/></g>
+<circle class="dot" cx="620" cy="80" r="7" stroke="#fb7185" stroke-width="3"/>
+<rect x="640" y="68" width="100" height="22" rx="11.0" fill="#fb7185" fill-opacity="0.15" stroke="#fb7185" stroke-width="1.6"/><text class="tag" x="690.0" y="80.0" fill="#fb7185">feature-C</text>
+<text class="tiny" x="360" y="250" text-anchor="middle" >each branch starts at the TIP of the one before it, not at main</text>
+<text class="tiny" x="360" y="266" text-anchor="middle" >git switch -c feature-B   (while already on feature-A)</text></svg>

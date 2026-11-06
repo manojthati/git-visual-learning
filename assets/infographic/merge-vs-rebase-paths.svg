@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 480" width="940" height="480" role="img" aria-label="A side-by-side comparison of the resulting commit graph shape after a merge versus a rebase of the same two branches">
+  <title>Merge vs. rebase — the two endings</title>
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.09"/>
+    </pattern>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#38bdf8"/></marker>
+    <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#34d399"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fb7185"/></marker>
+    <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c084fc"/></marker>
+  </defs>
+  <style>
+  text{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;dominant-baseline:middle}
+  .title{fill:#e2e8f0;font-size:17px;font-weight:700;dominant-baseline:auto}
+  .sub{fill:#94a3b8;font-size:12px;dominant-baseline:auto}
+  .lbl{fill:#94a3b8;font-size:11px;text-anchor:middle}
+  .lbl-l{fill:#94a3b8;font-size:11px}
+  .val{fill:#e2e8f0;font-size:13px;text-anchor:middle;font-weight:600}
+  .tiny{fill:#94a3b8;font-size:9.5px;text-anchor:middle}
+  .step{fill:#fbbf24;font-size:12px;font-weight:700}
+  .road{stroke-linecap:round;fill:none}
+  .dot{fill:#fff;stroke-width:3}
+  .tag{font-size:10px;font-weight:700;text-anchor:middle}
+  
+  </style>
+  <rect x="0" y="0" width="940" height="480" rx="14" fill="#0b1c2c"/>
+  <rect x="0" y="0" width="940" height="480" rx="14" fill="url(#g)"/>
+  <rect x="0.75" y="0.75" width="938.5" height="478.5" rx="13.5" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.35"/>
+  <text class="title" x="24" y="34">Merge vs. rebase — the two endings</text>
+  <text class="sub" x="24" y="54">Same starting point, two different final shapes</text>
+<text class="lbl-l" x="24" y="96" >same two branches, two different endings — pick based on who else has pulled the branch</text>
+<text class="val" x="230" y="140" fill="#34d399" text-anchor="middle" >Merge</text>
+<path class="road" d="M60,220 L180,220" stroke="#34d399" stroke-width="13"/>
+<path class="road" d="M100,220 C 140,220 140,300 220,300" stroke="#fbbf24" stroke-width="10"/>
+<circle class="dot" cx="180" cy="300" r="7" stroke="#fbbf24" stroke-width="3"/>
+<path d="M185,290 C 200,260 210,240 215,222" stroke="#fbbf24" stroke-width="2.5" fill="none" marker-end="url(#ara)"/>
+<circle class="dot" cx="220" cy="220" r="8" stroke="#34d399" stroke-width="3"/>
+<path class="road" d="M220,220 L400,220" stroke="#34d399" stroke-width="13"/>
+<text class="tiny" x="230" y="340" text-anchor="middle" >both histories preserved — a merge bubble with 2 parents</text>
+<text class="val" x="710" y="140" fill="#38bdf8" text-anchor="middle" >Rebase</text>
+<path class="road" d="M540,220 L660,220" stroke="#34d399" stroke-width="13"/>
+<g opacity="0.25">
+<path class="road" d="M580,220 C 620,220 620,300 700,300" stroke="#fbbf24" stroke-width="9"/>
+</g>
+<path class="road" d="M660,220 L880,220" stroke="#38bdf8" stroke-width="13"/>
+<circle class="dot" cx="760" cy="220" r="7" stroke="#38bdf8" stroke-width="3"/>
+<text class="tiny" x="710" y="340" text-anchor="middle" >linear history — old branch commits abandoned, new ones replayed</text>
+<text class="lbl-l" x="470" y="410" text-anchor="middle" >merge: safe on shared branches, leaves a bubble  ·  rebase: clean history, never on a branch others have pulled</text></svg>

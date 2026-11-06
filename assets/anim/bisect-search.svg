@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 200" width="720" height="200" role="img" aria-label="Animation: git bisect repeatedly checks out the midpoint of the good-bad range until the breaking commit is found">
+  <title>Bisect binary-searches your history</title>
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.09"/>
+    </pattern>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#38bdf8"/></marker>
+    <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#34d399"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fb7185"/></marker>
+    <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c084fc"/></marker>
+  </defs>
+  <style>
+  text{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;dominant-baseline:middle}
+  .title{fill:#e2e8f0;font-size:17px;font-weight:700;dominant-baseline:auto}
+  .sub{fill:#94a3b8;font-size:12px;dominant-baseline:auto}
+  .lbl{fill:#94a3b8;font-size:11px;text-anchor:middle}
+  .lbl-l{fill:#94a3b8;font-size:11px}
+  .val{fill:#e2e8f0;font-size:13px;text-anchor:middle;font-weight:600}
+  .tiny{fill:#94a3b8;font-size:9.5px;text-anchor:middle}
+  .step{fill:#fbbf24;font-size:12px;font-weight:700}
+  .road{stroke-linecap:round;fill:none}
+  .dot{fill:#fff;stroke-width:3}
+  .tag{font-size:10px;font-weight:700;text-anchor:middle}
+  
+  #m0{opacity:0;animation:k0 8s infinite}
+  @keyframes k0{0%{opacity:0}10%{opacity:0}14%{opacity:1}26%{opacity:1}30%{opacity:0}100%{opacity:0}}
+  #m1{opacity:0;animation:k1 8s infinite}
+  @keyframes k1{0%{opacity:0}28%{opacity:0}32%{opacity:1}44%{opacity:1}48%{opacity:0}100%{opacity:0}}
+  #m2{opacity:0;animation:k2 8s infinite}
+  @keyframes k2{0%{opacity:0}46%{opacity:0}50%{opacity:1}62%{opacity:1}66%{opacity:0}100%{opacity:0}}
+  #m3{opacity:0;animation:k3 8s infinite}
+  @keyframes k3{0%{opacity:0}64%{opacity:0}68%{opacity:1}80%{opacity:1}84%{opacity:0}100%{opacity:0}}
+  .found{opacity:0;animation:fnd 8s infinite}
+  @keyframes fnd{0%{opacity:0}78%{opacity:0}86%{opacity:1}100%{opacity:1}}
+  </style>
+  <rect x="0" y="0" width="720" height="200" rx="14" fill="#0b1c2c"/>
+  <rect x="0" y="0" width="720" height="200" rx="14" fill="url(#g)"/>
+  <rect x="0.75" y="0.75" width="718.5" height="198.5" rx="13.5" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.35"/>
+  <text class="title" x="24" y="34">Bisect binary-searches your history</text>
+  <text class="sub" x="24" y="54">Each good/bad answer halves the remaining range</text>
+<line x1="40" y1="110" x2="680" y2="110" stroke="#94a3b8" stroke-width="2"/>
+<circle class="dot" cx="60" cy="110" r="10" stroke="#34d399" stroke-width="3"/>
+<text class="tiny" x="60" y="140" >good</text>
+<circle class="dot" cx="660" cy="110" r="10" stroke="#fb7185" stroke-width="3"/>
+<text class="tiny" x="660" y="140" >bad</text>
+<g id="m0" class="m0"><circle class="dot" cx="360" cy="110" r="9" stroke="#fbbf24" stroke-width="3"/><text class="tiny" x="360" y="86" text-anchor="middle" fill="#fbbf24">test</text></g>
+<g id="m1" class="m1"><circle class="dot" cx="210" cy="110" r="9" stroke="#fbbf24" stroke-width="3"/><text class="tiny" x="210" y="86" text-anchor="middle" fill="#fbbf24">test</text></g>
+<g id="m2" class="m2"><circle class="dot" cx="285" cy="110" r="9" stroke="#fbbf24" stroke-width="3"/><text class="tiny" x="285" y="86" text-anchor="middle" fill="#fbbf24">test</text></g>
+<g id="m3" class="m3"><circle class="dot" cx="248" cy="110" r="9" stroke="#fbbf24" stroke-width="3"/><text class="tiny" x="248" y="86" text-anchor="middle" fill="#fbbf24">test</text></g>
+<g id="found" class="found"><circle class="dot" cx="248" cy="110" r="9" stroke="#fb7185" stroke-width="3"/></g>
+<text class="tiny" x="360" y="170" text-anchor="middle" >git bisect good / bad — culprit found in O(log n) steps, not O(n)</text></svg>

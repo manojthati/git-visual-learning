@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 340" width="880" height="340" role="img" aria-label="Blueprint: cherry-pick copies a single commit's change from one branch onto another without disturbing the original">
+  <title>Cherry-Picking — anatomy</title>
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.09"/>
+    </pattern>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#38bdf8"/></marker>
+    <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#34d399"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fb7185"/></marker>
+    <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c084fc"/></marker>
+  </defs>
+  <style>
+  text{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;dominant-baseline:middle}
+  .title{fill:#e2e8f0;font-size:17px;font-weight:700;dominant-baseline:auto}
+  .sub{fill:#94a3b8;font-size:12px;dominant-baseline:auto}
+  .lbl{fill:#94a3b8;font-size:11px;text-anchor:middle}
+  .lbl-l{fill:#94a3b8;font-size:11px}
+  .val{fill:#e2e8f0;font-size:13px;text-anchor:middle;font-weight:600}
+  .tiny{fill:#94a3b8;font-size:9.5px;text-anchor:middle}
+  .step{fill:#fbbf24;font-size:12px;font-weight:700}
+  .road{stroke-linecap:round;fill:none}
+  .dot{fill:#fff;stroke-width:3}
+  .tag{font-size:10px;font-weight:700;text-anchor:middle}
+  
+  </style>
+  <rect x="0" y="0" width="880" height="340" rx="14" fill="#0b1c2c"/>
+  <rect x="0" y="0" width="880" height="340" rx="14" fill="url(#g)"/>
+  <rect x="0.75" y="0.75" width="878.5" height="338.5" rx="13.5" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.35"/>
+  <text class="title" x="24" y="34">Cherry-Picking — anatomy</text>
+  <text class="sub" x="24" y="54">One commit, copied onto another branch as a new commit with a new hash</text>
+<text class="lbl-l" x="24" y="96" >cherry-pick copies the DIFF of one commit and applies it as a brand-new commit elsewhere — the donor is untouched</text>
+<path class="road" d="M60,220 L420,220" stroke="#38bdf8" stroke-width="13"/>
+<circle class="dot" cx="150" cy="220" r="7" stroke="#38bdf8" stroke-width="3"/>
+<circle class="dot" cx="260" cy="220" r="9" stroke="#fbbf24" stroke-width="3"/>
+<circle class="dot" cx="360" cy="220" r="7" stroke="#38bdf8" stroke-width="3"/>
+<rect x="60" y="240" width="80" height="20" rx="10.0" fill="#38bdf8" fill-opacity="0.15" stroke="#38bdf8" stroke-width="1.6"/><text class="tag" x="100.0" y="251.0" fill="#38bdf8">branch-B</text>
+<path class="road" d="M60,110 L320,110" stroke="#34d399" stroke-width="13"/>
+<circle class="dot" cx="150" cy="110" r="7" stroke="#34d399" stroke-width="3"/>
+<rect x="60" y="80" width="80" height="20" rx="10.0" fill="#34d399" fill-opacity="0.15" stroke="#34d399" stroke-width="1.6"/><text class="tag" x="100.0" y="91.0" fill="#34d399">branch-A</text>
+<path d="M265,207 C 290,170 300,145 310,122" stroke="#fbbf24" stroke-width="2.5" stroke-dasharray="5,4" fill="none" marker-end="url(#ara)"/>
+<circle class="dot" cx="320" cy="110" r="8" stroke="#fbbf24" stroke-width="3"/>
+<text class="tiny" x="680" y="140" >branch-B keeps all three commits,</text>
+<text class="tiny" x="680" y="158" >including the picked one, unchanged.</text>
+<text class="tiny" x="680" y="184" fill="#fbbf24" >branch-A gains a NEW commit with</text>
+<text class="tiny" x="680" y="202" fill="#fbbf24" >the same change, a different hash.</text>
+<text class="lbl-l" x="440" y="300" text-anchor="middle" >best tool for 'I need just that one fix, not the whole branch' — a hotfix backport is the classic case</text></svg>

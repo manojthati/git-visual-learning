@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" width="720" height="320" role="img" aria-label="Animation: a change moves from the working directory, through staging, into the repository">
+  <title>The Three Trees</title>
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.09"/>
+    </pattern>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#38bdf8"/></marker>
+    <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#34d399"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fb7185"/></marker>
+    <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c084fc"/></marker>
+  </defs>
+  <style>
+  text{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;dominant-baseline:middle}
+  .title{fill:#e2e8f0;font-size:17px;font-weight:700;dominant-baseline:auto}
+  .sub{fill:#94a3b8;font-size:12px;dominant-baseline:auto}
+  .lbl{fill:#94a3b8;font-size:11px;text-anchor:middle}
+  .lbl-l{fill:#94a3b8;font-size:11px}
+  .val{fill:#e2e8f0;font-size:13px;text-anchor:middle;font-weight:600}
+  .tiny{fill:#94a3b8;font-size:9.5px;text-anchor:middle}
+  .step{fill:#fbbf24;font-size:12px;font-weight:700}
+  .road{stroke-linecap:round;fill:none}
+  .dot{fill:#fff;stroke-width:3}
+  .tag{font-size:10px;font-weight:700;text-anchor:middle}
+  
+  .beam1,.beam2{opacity:0;stroke-dasharray:4,4}
+  .beam1{animation:b1 7s infinite}
+  .beam2{animation:b2 7s infinite}
+  .back{opacity:0;animation:bk 7s infinite}
+  #box-staging{animation:gs 7s infinite}
+  #box-repo{animation:gr2 7s infinite}
+  @keyframes b1{0%{opacity:0}8%{opacity:0}14%{opacity:1}30%{opacity:1}36%{opacity:0}100%{opacity:0}}
+  @keyframes gs{0%{fill-opacity:0.08}14%{fill-opacity:0.08}20%{fill-opacity:0.25}62%{fill-opacity:0.25}68%{fill-opacity:0.08}100%{fill-opacity:0.08}}
+  @keyframes b2{0%{opacity:0}44%{opacity:0}50%{opacity:1}66%{opacity:1}72%{opacity:0}100%{opacity:0}}
+  @keyframes gr2{0%{fill-opacity:0.08}50%{fill-opacity:0.08}56%{fill-opacity:0.25}98%{fill-opacity:0.25}100%{fill-opacity:0.25}}
+  @keyframes bk{0%{opacity:0}80%{opacity:0}88%{opacity:1}96%{opacity:1}100%{opacity:0}}
+
+  </style>
+  <rect x="0" y="0" width="720" height="320" rx="14" fill="#0b1c2c"/>
+  <rect x="0" y="0" width="720" height="320" rx="14" fill="url(#g)"/>
+  <rect x="0.75" y="0.75" width="718.5" height="318.5" rx="13.5" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.35"/>
+  <text class="title" x="24" y="34">The Three Trees</text>
+  <text class="sub" x="24" y="54">Everything in git moves between exactly three places</text>
+<rect id="box-working" x="50" y="130" width="150" height="90" rx="10" fill="#38bdf8" fill-opacity="0.08" stroke="#38bdf8" stroke-width="2"/>
+<text class="val" x="125" y="168" text-anchor="middle" >Working</text>
+<text class="val" x="125" y="186" text-anchor="middle" >Directory</text>
+<rect id="box-staging" x="300" y="130" width="150" height="90" rx="10" fill="#38bdf8" fill-opacity="0.08" stroke="#fbbf24" stroke-width="2"/>
+<text class="val" x="375" y="168" text-anchor="middle" >Staging</text>
+<text class="val" x="375" y="186" text-anchor="middle" >Area</text>
+<rect id="box-repo" x="550" y="130" width="150" height="90" rx="10" fill="#38bdf8" fill-opacity="0.08" stroke="#34d399" stroke-width="2"/>
+<text class="val" x="625" y="168" text-anchor="middle" >Repository</text>
+<path id="beam1" class="beam1" d="M200,175 L298,175" stroke="#fbbf24" stroke-width="3" marker-end="url(#ara)" fill="none"/>
+<text class="lbl" x="249" y="160" fill="#fbbf24" text-anchor="middle" >git add</text>
+<path id="beam2" class="beam2" d="M450,175 L548,175" stroke="#34d399" stroke-width="3" marker-end="url(#arg)" fill="none"/>
+<text class="lbl" x="499" y="160" fill="#34d399" text-anchor="middle" >git commit</text>
+<path id="back" class="back" d="M625,222 C625,260 125,260 125,222" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#ar)"/>
+<text class="lbl" x="375" y="278" >git checkout / restore — moves history back down</text>
+<text class="tiny" x="360" y="300" >A commit is a full snapshot of the tree, plus a pointer to its parent.</text></svg>

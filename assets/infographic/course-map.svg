@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 620" width="940" height="620" role="img" aria-label="A map of all eleven modules grouped into foundations, combining-history, everyday-tools, strategy-and-safety, and collaboration-and-advanced families">
+  <title>The whole course on one sheet</title>
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.09"/>
+    </pattern>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#38bdf8"/></marker>
+    <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#34d399"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fb7185"/></marker>
+    <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c084fc"/></marker>
+  </defs>
+  <style>
+  text{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;dominant-baseline:middle}
+  .title{fill:#e2e8f0;font-size:17px;font-weight:700;dominant-baseline:auto}
+  .sub{fill:#94a3b8;font-size:12px;dominant-baseline:auto}
+  .lbl{fill:#94a3b8;font-size:11px;text-anchor:middle}
+  .lbl-l{fill:#94a3b8;font-size:11px}
+  .val{fill:#e2e8f0;font-size:13px;text-anchor:middle;font-weight:600}
+  .tiny{fill:#94a3b8;font-size:9.5px;text-anchor:middle}
+  .step{fill:#fbbf24;font-size:12px;font-weight:700}
+  .road{stroke-linecap:round;fill:none}
+  .dot{fill:#fff;stroke-width:3}
+  .tag{font-size:10px;font-weight:700;text-anchor:middle}
+  
+  </style>
+  <rect x="0" y="0" width="940" height="620" rx="14" fill="#0b1c2c"/>
+  <rect x="0" y="0" width="940" height="620" rx="14" fill="url(#g)"/>
+  <rect x="0.75" y="0.75" width="938.5" height="618.5" rx="13.5" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.35"/>
+  <text class="title" x="24" y="34">The whole course on one sheet</text>
+  <text class="sub" x="24" y="54">Eleven modules, five groups, one recommended path</text>
+<text class="lbl-l" x="24" y="96" >eleven modules, five groups, one suggested path through them</text>
+<text class="val" x="60" y="130" fill="#34d399" text-anchor="start" >FOUNDATIONS</text>
+<rect x="60" y="146" width="123.60000000000001" height="42" rx="7" fill="#34d399" fill-opacity="0.1" stroke="#34d399" stroke-width="1.8"/>
+<text class="val" x="121.80000000000001" y="167.0" text-anchor="middle" >01 Three Trees</text>
+<text class="val" x="60" y="220" fill="#fbbf24" text-anchor="start" >COMBINING HISTORY</text>
+<rect x="60" y="236" width="108.80000000000001" height="42" rx="7" fill="#fbbf24" fill-opacity="0.1" stroke="#fbbf24" stroke-width="1.8"/>
+<text class="val" x="114.4" y="257.0" text-anchor="middle" >02 Branching</text>
+<rect x="184.8" y="236" width="94.0" height="42" rx="7" fill="#fbbf24" fill-opacity="0.1" stroke="#fbbf24" stroke-width="1.8"/>
+<text class="val" x="231.8" y="257.0" text-anchor="middle" >03 Merging</text>
+<rect x="294.8" y="236" width="86.60000000000001" height="42" rx="7" fill="#fbbf24" fill-opacity="0.1" stroke="#fbbf24" stroke-width="1.8"/>
+<text class="val" x="338.1" y="257.0" text-anchor="middle" >04 Rebase</text>
+<rect x="397.40000000000003" y="236" width="160.6" height="42" rx="7" fill="#fbbf24" fill-opacity="0.1" stroke="#fbbf24" stroke-width="1.8"/>
+<text class="val" x="477.70000000000005" y="257.0" text-anchor="middle" >05 Stacked Branches</text>
+<text class="val" x="60" y="310" fill="#38bdf8" text-anchor="start" >EVERYDAY TOOLS</text>
+<rect x="60" y="326" width="101.4" height="42" rx="7" fill="#38bdf8" fill-opacity="0.1" stroke="#38bdf8" stroke-width="1.8"/>
+<text class="val" x="110.7" y="347.0" text-anchor="middle" >06 Stashing</text>
+<rect x="177.4" y="326" width="145.8" height="42" rx="7" fill="#38bdf8" fill-opacity="0.1" stroke="#38bdf8" stroke-width="1.8"/>
+<text class="val" x="250.3" y="347.0" text-anchor="middle" >07 Cherry-Picking</text>
+<text class="val" x="60" y="400" fill="#c084fc" text-anchor="start" >STRATEGY &amp; SAFETY</text>
+<rect x="60" y="416" width="116.2" height="42" rx="7" fill="#c084fc" fill-opacity="0.1" stroke="#c084fc" stroke-width="1.8"/>
+<text class="val" x="118.1" y="437.0" text-anchor="middle" >08 Strategies</text>
+<rect x="192.2" y="416" width="145.8" height="42" rx="7" fill="#c084fc" fill-opacity="0.1" stroke="#c084fc" stroke-width="1.8"/>
+<text class="val" x="265.1" y="437.0" text-anchor="middle" >09 Undoing Things</text>
+<text class="val" x="60" y="490" fill="#fb7185" text-anchor="start" >COLLABORATION &amp; ADVANCED</text>
+<rect x="60" y="506" width="160.6" height="42" rx="7" fill="#fb7185" fill-opacity="0.1" stroke="#fb7185" stroke-width="1.8"/>
+<text class="val" x="140.3" y="527.0" text-anchor="middle" >10 Remote Workflows</text>
+<rect x="236.6" y="506" width="160.6" height="42" rx="7" fill="#fb7185" fill-opacity="0.1" stroke="#fb7185" stroke-width="1.8"/>
+<text class="val" x="316.9" y="527.0" text-anchor="middle" >11 Advanced Toolbox</text>
+<text class="lbl-l" x="470" y="590" text-anchor="middle" >suggested route: 01 -> 02 -> 03 -> 04 -> 05, then 06/07 as needed, 08 once, 09 as a reference, 10-11 once collaborating</text></svg>

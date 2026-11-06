@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 420" width="880" height="420" role="img" aria-label="Blueprint: fast-forward merges slide a label forward on one road; three-way merges create a new commit joining two roads">
+  <title>Merging — anatomy</title>
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.09"/>
+    </pattern>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#38bdf8"/></marker>
+    <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#34d399"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fb7185"/></marker>
+    <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c084fc"/></marker>
+  </defs>
+  <style>
+  text{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;dominant-baseline:middle}
+  .title{fill:#e2e8f0;font-size:17px;font-weight:700;dominant-baseline:auto}
+  .sub{fill:#94a3b8;font-size:12px;dominant-baseline:auto}
+  .lbl{fill:#94a3b8;font-size:11px;text-anchor:middle}
+  .lbl-l{fill:#94a3b8;font-size:11px}
+  .val{fill:#e2e8f0;font-size:13px;text-anchor:middle;font-weight:600}
+  .tiny{fill:#94a3b8;font-size:9.5px;text-anchor:middle}
+  .step{fill:#fbbf24;font-size:12px;font-weight:700}
+  .road{stroke-linecap:round;fill:none}
+  .dot{fill:#fff;stroke-width:3}
+  .tag{font-size:10px;font-weight:700;text-anchor:middle}
+  
+  </style>
+  <rect x="0" y="0" width="880" height="420" rx="14" fill="#0b1c2c"/>
+  <rect x="0" y="0" width="880" height="420" rx="14" fill="url(#g)"/>
+  <rect x="0.75" y="0.75" width="878.5" height="418.5" rx="13.5" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.35"/>
+  <text class="title" x="24" y="34">Merging — anatomy</text>
+  <text class="sub" x="24" y="54">Exactly two outcomes exist: a fast-forward, or a new two-parent merge commit</text>
+<text class="lbl-l" x="24" y="96" >git decides the merge TYPE for you, based purely on whether main moved since you forked</text>
+<text class="val" x="220" y="130" fill="#34d399" text-anchor="middle" >Fast-forward</text>
+<path class="road" d="M60,190 L180,190" stroke="#34d399" stroke-width="14"/>
+<path class="road" d="M180,190 L400,190" stroke="#fbbf24" stroke-width="14"/>
+<circle class="dot" cx="180" cy="190" r="7" stroke="#34d399" stroke-width="3"/>
+<circle class="dot" cx="300" cy="190" r="7" stroke="#fbbf24" stroke-width="3"/>
+<text class="tiny" x="220" y="225" text-anchor="middle" >main's label slides forward — same single road</text>
+<text class="val" x="660" y="130" fill="#fbbf24" text-anchor="middle" >Three-way merge</text>
+<path class="road" d="M500,170 L820,170" stroke="#34d399" stroke-width="14"/>
+<path class="road" d="M560,170 C 620,170 620,250 700,250" stroke="#fbbf24" stroke-width="11"/>
+<circle class="dot" cx="650" cy="250" r="7" stroke="#fbbf24" stroke-width="3"/>
+<path d="M650,240 C 680,210 700,190 710,172" stroke="#fbbf24" stroke-width="2.5" fill="none" marker-end="url(#ara)"/>
+<circle class="dot" cx="710" cy="170" r="9" stroke="#34d399" stroke-width="3"/>
+<text class="tiny" x="660" y="285" text-anchor="middle" >a new commit with TWO parents ties both roads together</text>
+<text class="lbl-l" x="440" y="340" text-anchor="middle" >git merge --no-ff forces a merge commit even when a fast-forward was possible</text>
+<text class="lbl-l" x="440" y="370" text-anchor="middle" >git merge --squash folds the diff in as one commit with NO merge relationship recorded</text></svg>

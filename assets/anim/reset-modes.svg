@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 260" width="720" height="260" role="img" aria-label="Animation: the three reset modes move HEAD identically but reach progressively further into staging and the working directory">
+  <title>git reset --soft / --mixed / --hard</title>
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.09"/>
+    </pattern>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#38bdf8"/></marker>
+    <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#34d399"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fb7185"/></marker>
+    <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c084fc"/></marker>
+  </defs>
+  <style>
+  text{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;dominant-baseline:middle}
+  .title{fill:#e2e8f0;font-size:17px;font-weight:700;dominant-baseline:auto}
+  .sub{fill:#94a3b8;font-size:12px;dominant-baseline:auto}
+  .lbl{fill:#94a3b8;font-size:11px;text-anchor:middle}
+  .lbl-l{fill:#94a3b8;font-size:11px}
+  .val{fill:#e2e8f0;font-size:13px;text-anchor:middle;font-weight:600}
+  .tiny{fill:#94a3b8;font-size:9.5px;text-anchor:middle}
+  .step{fill:#fbbf24;font-size:12px;font-weight:700}
+  .road{stroke-linecap:round;fill:none}
+  .dot{fill:#fff;stroke-width:3}
+  .tag{font-size:10px;font-weight:700;text-anchor:middle}
+  
+  .soft,.mixed,.hard{opacity:0}
+  .soft{animation:s 9s infinite}
+  .mixed{animation:m 9s infinite}
+  .hard{animation:h 9s infinite}
+  @keyframes s{0%{opacity:1}28%{opacity:1}34%{opacity:0}100%{opacity:0}}
+  @keyframes m{0%{opacity:0}34%{opacity:0}40%{opacity:1}62%{opacity:1}68%{opacity:0}100%{opacity:0}}
+  @keyframes h{0%{opacity:0}68%{opacity:0}74%{opacity:1}100%{opacity:1}}
+
+  </style>
+  <rect x="0" y="0" width="720" height="260" rx="14" fill="#0b1c2c"/>
+  <rect x="0" y="0" width="720" height="260" rx="14" fill="url(#g)"/>
+  <rect x="0.75" y="0.75" width="718.5" height="258.5" rx="13.5" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.35"/>
+  <text class="title" x="24" y="34">git reset --soft / --mixed / --hard</text>
+  <text class="sub" x="24" y="54">Progressively more destructive, left to right</text>
+<rect x="60" y="60" width="180" height="50" rx="8" fill="#34d399" fill-opacity="0.1" stroke="#34d399" stroke-width="2"/>
+<text class="val" x="150" y="90" >HEAD / branch tip</text>
+<rect x="290" y="60" width="180" height="50" rx="8" fill="#fbbf24" fill-opacity="0.1" stroke="#fbbf24" stroke-width="2"/>
+<text class="val" x="380" y="90" >Staging area</text>
+<rect x="500" y="60" width="180" height="50" rx="8" fill="#38bdf8" fill-opacity="0.1" stroke="#38bdf8" stroke-width="2"/>
+<text class="val" x="590" y="90" >Working directory</text>
+<g id="soft" class="soft">
+<text class="step" x="150" y="150" text-anchor="middle" >--soft</text>
+<text class="tiny" x="150" y="170" fill="#34d399" text-anchor="middle" >moves</text>
+</g>
+<g id="mixed" class="mixed">
+<text class="step" x="150" y="150" text-anchor="middle" >--mixed (default)</text>
+<text class="tiny" x="150" y="170" fill="#fbbf24" text-anchor="middle" >moves + unstaged, kept</text>
+</g>
+<g id="hard" class="hard">
+<text class="step" x="150" y="150" text-anchor="middle" >--hard</text>
+<text class="tiny" x="150" y="170" fill="#fb7185" text-anchor="middle" >moves + staged + working dir ALL discarded</text>
+</g>
+<text class="tiny" x="360" y="220" text-anchor="middle" >git reset --MODE &lt;commit&gt;   always moves HEAD; the mode decides how far downstream it reaches</text></svg>

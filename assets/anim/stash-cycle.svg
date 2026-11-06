@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 260" width="720" height="260" role="img" aria-label="Animation: git stash push tucks dirty changes onto a LIFO stack and gives back a clean working directory; pop brings the top entry back">
+  <title>Stash: a LIFO shelf for dirty work</title>
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.09"/>
+    </pattern>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#38bdf8"/></marker>
+    <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#34d399"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fb7185"/></marker>
+    <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c084fc"/></marker>
+  </defs>
+  <style>
+  text{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;dominant-baseline:middle}
+  .title{fill:#e2e8f0;font-size:17px;font-weight:700;dominant-baseline:auto}
+  .sub{fill:#94a3b8;font-size:12px;dominant-baseline:auto}
+  .lbl{fill:#94a3b8;font-size:11px;text-anchor:middle}
+  .lbl-l{fill:#94a3b8;font-size:11px}
+  .val{fill:#e2e8f0;font-size:13px;text-anchor:middle;font-weight:600}
+  .tiny{fill:#94a3b8;font-size:9.5px;text-anchor:middle}
+  .step{fill:#fbbf24;font-size:12px;font-weight:700}
+  .road{stroke-linecap:round;fill:none}
+  .dot{fill:#fff;stroke-width:3}
+  .tag{font-size:10px;font-weight:700;text-anchor:middle}
+  
+  .a1{opacity:0;animation:a1a 7s infinite}
+  .a2{opacity:0;animation:a2a 7s infinite}
+  .entry0{opacity:0;animation:e0 7s infinite}
+  #wdirty{animation:wd 7s infinite}
+  #wclean{animation:wc 7s infinite}
+  @keyframes a1a{0%{opacity:0}10%{opacity:0}18%{opacity:1}30%{opacity:1}38%{opacity:0}100%{opacity:0}}
+  @keyframes e0{0%{opacity:0}30%{opacity:0}38%{opacity:1}68%{opacity:1}76%{opacity:0}100%{opacity:0}}
+  @keyframes a2a{0%{opacity:0}60%{opacity:0}68%{opacity:1}80%{opacity:1}88%{opacity:0}100%{opacity:0}}
+  @keyframes wd{0%{fill-opacity:0.12}30%{fill-opacity:0.12}40%{fill-opacity:0.03}100%{fill-opacity:0.03}}
+  @keyframes wc{0%{fill-opacity:0.03}76%{fill-opacity:0.03}86%{fill-opacity:0.18}100%{fill-opacity:0.18}}
+
+  </style>
+  <rect x="0" y="0" width="720" height="260" rx="14" fill="#0b1c2c"/>
+  <rect x="0" y="0" width="720" height="260" rx="14" fill="url(#g)"/>
+  <rect x="0.75" y="0.75" width="718.5" height="258.5" rx="13.5" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.35"/>
+  <text class="title" x="24" y="34">Stash: a LIFO shelf for dirty work</text>
+  <text class="sub" x="24" y="54">Shelve everything, get a clean tree, bring it back later</text>
+<rect id="wdirty" x="30" y="60" width="160" height="70" rx="10" fill="#fb7185" fill-opacity="0.12" stroke="#fb7185" stroke-width="2"/>
+<text class="val" x="110" y="90" >working dir</text>
+<text class="tiny" x="110" y="112" fill="#fb7185" >dirty, mid-edit</text>
+<rect x="260" y="30" width="150" height="150" rx="10" fill="#38bdf8" fill-opacity="0.06" stroke="#94a3b8" stroke-width="1.5"/>
+<text class="val" x="335" y="50" >stash stack</text>
+<g id="entry0" class="entry0"><rect x="275" y="65" width="120" height="26" rx="13.0" fill="#fbbf24" fill-opacity="0.15" stroke="#fbbf24" stroke-width="1.6"/><text class="tag" x="335.0" y="79.0" fill="#fbbf24">stash@{0} "wip"</text></g>
+<rect id="wclean" x="520" y="60" width="160" height="70" rx="10" fill="#34d399" fill-opacity="0.08" stroke="#34d399" stroke-width="2"/>
+<text class="val" x="600" y="90" >working dir</text>
+<text class="tiny" x="600" y="112" fill="#34d399" >clean again</text>
+<path id="a1" class="a1" d="M195,95 L258,95" stroke="#fbbf24" stroke-width="2.5" marker-end="url(#ara)"/>
+<text class="tiny" x="226" y="82" fill="#fbbf24" text-anchor="middle" >stash push</text>
+<path id="a2" class="a2" d="M412,95 L518,95" stroke="#34d399" stroke-width="2.5" marker-end="url(#arg)"/>
+<text class="tiny" x="465" y="82" fill="#34d399" text-anchor="middle" >stash pop</text>
+<text class="tiny" x="360" y="220" text-anchor="middle" >pop = apply + remove from the stack  ·  apply = reuse without removing</text></svg>

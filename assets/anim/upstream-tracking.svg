@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 220" width="720" height="220" role="img" aria-label="Animation: the origin/main tracking label advances to match the remote's tip after a push">
+  <title>Upstream tracking</title>
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.09"/>
+    </pattern>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#38bdf8"/></marker>
+    <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#34d399"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fb7185"/></marker>
+    <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c084fc"/></marker>
+  </defs>
+  <style>
+  text{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;dominant-baseline:middle}
+  .title{fill:#e2e8f0;font-size:17px;font-weight:700;dominant-baseline:auto}
+  .sub{fill:#94a3b8;font-size:12px;dominant-baseline:auto}
+  .lbl{fill:#94a3b8;font-size:11px;text-anchor:middle}
+  .lbl-l{fill:#94a3b8;font-size:11px}
+  .val{fill:#e2e8f0;font-size:13px;text-anchor:middle;font-weight:600}
+  .tiny{fill:#94a3b8;font-size:9.5px;text-anchor:middle}
+  .step{fill:#fbbf24;font-size:12px;font-weight:700}
+  .road{stroke-linecap:round;fill:none}
+  .dot{fill:#fff;stroke-width:3}
+  .tag{font-size:10px;font-weight:700;text-anchor:middle}
+  
+  #rtag{animation:rt 6s infinite}
+  .rtag2{opacity:0;animation:rt2 6s infinite}
+  @keyframes rt{0%{opacity:1}46%{opacity:1}54%{opacity:0}100%{opacity:0}}
+  @keyframes rt2{0%{opacity:0}54%{opacity:0}62%{opacity:1}100%{opacity:1}}
+
+  </style>
+  <rect x="0" y="0" width="720" height="220" rx="14" fill="#0b1c2c"/>
+  <rect x="0" y="0" width="720" height="220" rx="14" fill="url(#g)"/>
+  <rect x="0.75" y="0.75" width="718.5" height="218.5" rx="13.5" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.35"/>
+  <text class="title" x="24" y="34">Upstream tracking</text>
+  <text class="sub" x="24" y="54">Once set, your local branch remembers which remote branch it syncs with</text>
+<path class="road" d="M40,120 L620,120" stroke="#34d399" stroke-width="14"/>
+<circle class="dot" cx="140" cy="120" r="7" stroke="#34d399" stroke-width="3"/>
+<rect x="100" y="150" width="70" height="20" rx="10.0" fill="#34d399" fill-opacity="0.15" stroke="#34d399" stroke-width="1.6"/><text class="tag" x="135.0" y="161.0" fill="#34d399">main</text>
+<g id="rtag" class="rtag"><rect x="100" y="90" width="110" height="20" rx="10.0" fill="#38bdf8" fill-opacity="0.15" stroke="#38bdf8" stroke-width="1.6"/><text class="tag" x="155.0" y="101.0" fill="#38bdf8">origin/main</text></g>
+<circle class="dot" cx="340" cy="120" r="8" stroke="#34d399" stroke-width="3"/>
+<g id="rtag2" class="rtag2"><rect x="300" y="90" width="110" height="20" rx="10.0" fill="#38bdf8" fill-opacity="0.15" stroke="#38bdf8" stroke-width="1.6"/><text class="tag" x="355.0" y="101.0" fill="#38bdf8">origin/main</text></g>
+<text class="tiny" x="360" y="190" text-anchor="middle" >git push -u origin feature/x   sets the upstream once; after that, plain "git push" knows where to go</text></svg>

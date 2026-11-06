@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 260" width="720" height="260" role="img" aria-label="Animation: feature's history flows into main through a new merge commit with two parents">
+  <title>Three-way merge</title>
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.09"/>
+    </pattern>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#38bdf8"/></marker>
+    <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#34d399"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fb7185"/></marker>
+    <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c084fc"/></marker>
+  </defs>
+  <style>
+  text{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;dominant-baseline:middle}
+  .title{fill:#e2e8f0;font-size:17px;font-weight:700;dominant-baseline:auto}
+  .sub{fill:#94a3b8;font-size:12px;dominant-baseline:auto}
+  .lbl{fill:#94a3b8;font-size:11px;text-anchor:middle}
+  .lbl-l{fill:#94a3b8;font-size:11px}
+  .val{fill:#e2e8f0;font-size:13px;text-anchor:middle;font-weight:600}
+  .tiny{fill:#94a3b8;font-size:9.5px;text-anchor:middle}
+  .step{fill:#fbbf24;font-size:12px;font-weight:700}
+  .road{stroke-linecap:round;fill:none}
+  .dot{fill:#fff;stroke-width:3}
+  .tag{font-size:10px;font-weight:700;text-anchor:middle}
+  
+  .flow{opacity:0;animation:fl 6s infinite}
+  .mergedot{opacity:0;animation:md 6s infinite}
+  .gone{opacity:0;animation:gn 6s infinite}
+  @keyframes fl{0%{opacity:0}30%{opacity:0}42%{opacity:1}100%{opacity:1}}
+  @keyframes md{0%{opacity:0}48%{opacity:0}56%{opacity:1}100%{opacity:1}}
+  @keyframes gn{0%{opacity:0}56%{opacity:0}64%{opacity:1}100%{opacity:1}}
+
+  </style>
+  <rect x="0" y="0" width="720" height="260" rx="14" fill="#0b1c2c"/>
+  <rect x="0" y="0" width="720" height="260" rx="14" fill="url(#g)"/>
+  <rect x="0.75" y="0.75" width="718.5" height="258.5" rx="13.5" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.35"/>
+  <text class="title" x="24" y="34">Three-way merge</text>
+  <text class="sub" x="24" y="54">Both roads kept moving, so a new merge commit ties them together</text>
+<path class="road" d="M40,100 L620,100" stroke="#34d399" stroke-width="16"/>
+<circle class="dot" cx="120" cy="100" r="7" stroke="#34d399" stroke-width="3"/>
+<circle class="dot" cx="220" cy="100" r="7" stroke="#34d399" stroke-width="3"/>
+<path class="road" d="M220,100 C 300,100 300,180 420,180" stroke="#fbbf24" stroke-width="12"/>
+<circle class="dot" cx="330" cy="180" r="7" stroke="#fbbf24" stroke-width="3"/>
+<g id="flow" class="flow">
+<path class="road" d="M330,180 C 380,180 380,105 420,105" stroke="#fbbf24" stroke-width="12"/>
+</g>
+<g id="mergedot" class="mergedot"><circle class="dot" cx="420" cy="100" r="9" stroke="#34d399" stroke-width="3"/></g>
+<circle class="dot" cx="520" cy="100" r="7" stroke="#34d399" stroke-width="3"/>
+<rect x="100" y="70" width="70" height="22" rx="11.0" fill="#34d399" fill-opacity="0.15" stroke="#34d399" stroke-width="1.6"/><text class="tag" x="135.0" y="82.0" fill="#34d399">main</text>
+<rect x="280" y="205" width="90" height="22" rx="11.0" fill="#fbbf24" fill-opacity="0.15" stroke="#fbbf24" stroke-width="1.6"/><text class="tag" x="325.0" y="217.0" fill="#fbbf24">feature</text>
+<g id="gone" class="gone"><rect x="280" y="205" width="90" height="22" rx="11.0" fill="#fbbf24" fill-opacity="0.15" stroke="#fbbf24" stroke-width="1.6"/><text class="tag" x="325.0" y="217.0" fill="#fbbf24">feature (gone)</text></g>
+<text class="lbl" x="360" y="235" text-anchor="middle" >git checkout main &amp;&amp; git merge feature</text></svg>

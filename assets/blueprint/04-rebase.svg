@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 420" width="880" height="420" role="img" aria-label="Blueprint: rebase detaches a branch's commits from their original base and replays them onto a new one, producing new commit hashes">
+  <title>Rebase — anatomy</title>
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.09"/>
+    </pattern>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#38bdf8"/></marker>
+    <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#34d399"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fb7185"/></marker>
+    <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c084fc"/></marker>
+  </defs>
+  <style>
+  text{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;dominant-baseline:middle}
+  .title{fill:#e2e8f0;font-size:17px;font-weight:700;dominant-baseline:auto}
+  .sub{fill:#94a3b8;font-size:12px;dominant-baseline:auto}
+  .lbl{fill:#94a3b8;font-size:11px;text-anchor:middle}
+  .lbl-l{fill:#94a3b8;font-size:11px}
+  .val{fill:#e2e8f0;font-size:13px;text-anchor:middle;font-weight:600}
+  .tiny{fill:#94a3b8;font-size:9.5px;text-anchor:middle}
+  .step{fill:#fbbf24;font-size:12px;font-weight:700}
+  .road{stroke-linecap:round;fill:none}
+  .dot{fill:#fff;stroke-width:3}
+  .tag{font-size:10px;font-weight:700;text-anchor:middle}
+  
+  </style>
+  <rect x="0" y="0" width="880" height="420" rx="14" fill="#0b1c2c"/>
+  <rect x="0" y="0" width="880" height="420" rx="14" fill="url(#g)"/>
+  <rect x="0.75" y="0.75" width="878.5" height="418.5" rx="13.5" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.35"/>
+  <text class="title" x="24" y="34">Rebase — anatomy</text>
+  <text class="sub" x="24" y="54">The same two commits, relocated onto a new base, with new identities</text>
+<text class="lbl-l" x="24" y="96" >rebase REPLAYS commits one at a time onto a new base — same patch, brand-new commit object, brand-new hash</text>
+<path class="road" d="M60,160 L480,160" stroke="#34d399" stroke-width="14"/>
+<circle class="dot" cx="160" cy="160" r="7" stroke="#34d399" stroke-width="3"/>
+<circle class="dot" cx="280" cy="160" r="7" stroke="#34d399" stroke-width="3"/>
+<circle class="dot" cx="400" cy="160" r="9" stroke="#34d399" stroke-width="3"/>
+<rect x="420" y="130" width="70" height="22" rx="11.0" fill="#34d399" fill-opacity="0.15" stroke="#34d399" stroke-width="1.6"/><text class="tag" x="455.0" y="142.0" fill="#34d399">main</text>
+<path class="road" d="M160,160 C 220,160 220,260 360,260" stroke="#fbbf24" stroke-width="10"/>
+<circle class="dot" cx="310" cy="260" r="6" stroke="#fbbf24" stroke-width="2"/>
+<text class="tiny" x="260" y="290" fill="#fbbf24" text-anchor="middle" >feature — old position (abandoned after rebase)</text>
+<path class="road" d="M500,160 L760,160" stroke="#fbbf24" stroke-width="13"/>
+<circle class="dot" cx="580" cy="160" r="7" stroke="#fbbf24" stroke-width="3"/>
+<circle class="dot" cx="680" cy="160" r="7" stroke="#fbbf24" stroke-width="3"/>
+<rect x="600" y="128" width="110" height="22" rx="11.0" fill="#fbbf24" fill-opacity="0.15" stroke="#fbbf24" stroke-width="1.6"/><text class="tag" x="655.0" y="140.0" fill="#fbbf24">feature — new position</text>
+<text class="lbl-l" x="440" y="340" text-anchor="middle" >the golden rule: never rebase a branch someone else has already pulled and built on top of</text>
+<text class="lbl-l" x="440" y="370" text-anchor="middle" >merge preserves hashes and both histories · rebase rewrites hashes for a linear history</text></svg>

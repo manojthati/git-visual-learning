@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learn Git Visually — gallery</title>
+<style>
+  :root{
+    --panel:#0b1c2c; --ink:#e2e8f0; --slate:#94a3b8; --cyan:#38bdf8;
+    --amber:#fbbf24; --green:#34d399; --rose:#fb7185; --violet:#c084fc;
+    --edge:rgba(56,189,248,.25); --card:#0d2233;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#071320;color:var(--ink);font-family:var(--mono);line-height:1.6}
+  a{color:var(--cyan)}
+  header{padding:56px 24px 36px;text-align:center;border-bottom:1px solid var(--edge);
+    background:radial-gradient(1200px 400px at 50% -120px,rgba(56,189,248,.12),transparent)}
+  h1{margin:0 0 10px;font-size:clamp(24px,4vw,38px);letter-spacing:-.5px}
+  .sub{color:var(--slate);font-size:14px;max-width:640px;margin:0 auto 22px}
+  .stats{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:20px}
+  .stat{border:1px solid var(--edge);border-radius:999px;padding:5px 14px;font-size:12px;color:var(--slate)}
+  .stat b{color:var(--ink)}
+  .cta{display:inline-block;margin:0 6px;padding:9px 18px;border:1px solid var(--cyan);
+    border-radius:8px;text-decoration:none;font-size:13px}
+  .cta.alt{border-color:var(--edge);color:var(--slate)}
+  main{max-width:1500px;margin:0 auto;padding:0 24px 80px}
+  section{margin-top:56px}
+  h2{font-size:15px;letter-spacing:1.6px;text-transform:uppercase;color:var(--cyan);
+    margin:0 0 6px;padding-bottom:10px;border-bottom:1px solid var(--edge)}
+  .lede{color:var(--slate);font-size:13px;margin:12px 0 24px}
+  .grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fill,minmax(430px,1fr))}
+  .card{background:var(--card);border:1px solid var(--edge);border-radius:14px;
+    padding:14px;display:flex;flex-direction:column;gap:10px}
+  .card img{width:100%;height:auto;display:block;border-radius:9px;background:#0b1c2c;min-height:120px}
+  .meta{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:12px}
+  .meta .name{color:var(--ink)}
+  .meta a{color:var(--slate);text-decoration:none;white-space:nowrap;font-size:11px}
+  .meta a:hover{color:var(--cyan)}
+  .wide{grid-template-columns:repeat(auto-fill,minmax(min(620px,100%),1fr))}
+  footer{border-top:1px solid var(--edge);padding:32px 24px;text-align:center;
+    color:var(--slate);font-size:12px}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin:18px 0 0;font-size:12px;color:var(--slate)}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .sw{width:11px;height:11px;border-radius:3px;display:inline-block}
+  @media (max-width:520px){ .grid,.wide{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Learn Git — Visually</h1>
+  <p class="sub">Eleven modules, each one real-world analogy, then animated, then rated for risk.
+     Every picture on this page is a plain SVG with the animation written in CSS inside it —
+     no JavaScript, no dependencies, no build step.</p>
+  <div class="stats">
+    <div class="stat"><b>11</b> modules</div>
+    <div class="stat"><b>20</b> animations</div>
+    <div class="stat"><b>11</b> blueprints</div>
+    <div class="stat"><b>5</b> infographics</div>
+    <div class="stat"><b>31</b> flashcards</div>
+    <div class="stat"><b>24</b> quiz questions</div>
+  </div>
+  <a class="cta" href="https://github.com/manojthati/git-visual-learning/blob/main/docs/00-how-to-read-this.md">Start reading →</a>
+  <a class="cta alt" href="https://github.com/manojthati/git-visual-learning/blob/main/docs/cheatsheet-commands.md">Cheat sheet</a>
+  <a class="cta alt" href="https://github.com/manojthati/git-visual-learning/blob/main/docs/quiz.md">Take the quiz</a>
+  <div class="legend">
+    <span><i class="sw" style="background:#34d399"></i>at rest / safe</span>
+    <span><i class="sw" style="background:#fbbf24"></i>active now</span>
+    <span><i class="sw" style="background:#38bdf8"></i>secondary branch</span>
+    <span><i class="sw" style="background:#fb7185"></i>destructive / risky</span>
+    <span><i class="sw" style="background:#c084fc"></i>third branch / relocated</span>
+  </div>
+</header>
+
+<main>
+
+<section>
+  <h2>Reference sheets</h2>
+  <p class="lede">Start here if you want the whole picture before the detail.</p>
+  <div class="grid wide">
+    <div class="card"><img src="assets/infographic/course-map.svg" alt="The whole course on one sheet">
+      <div class="meta"><span class="name">The whole course on one sheet</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/00-how-to-read-this.md">module 00 →</a></div></div>
+    <div class="card"><img src="assets/infographic/command-risk-matrix.svg" alt="Command risk and reversibility">
+      <div class="meta"><span class="name">Command risk & reversibility</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/cheatsheet-commands.md">cheat sheet →</a></div></div>
+    <div class="card"><img src="assets/infographic/merge-vs-rebase-paths.svg" alt="Merge vs rebase, the two endings">
+      <div class="meta"><span class="name">Merge vs. rebase — the two endings</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/04-rebase.md">module 04 →</a></div></div>
+    <div class="card"><img src="assets/infographic/workflow-strategy-chooser.svg" alt="Which branching strategy?">
+      <div class="meta"><span class="name">Which branching strategy?</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/08-branching-strategies.md">module 08 →</a></div></div>
+    <div class="card"><img src="assets/infographic/remote-sync-map.svg" alt="fetch, push and pull at a glance">
+      <div class="meta"><span class="name">fetch / push / pull at a glance</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/10-remote-workflows.md">module 10 →</a></div></div>
+  </div>
+</section>
+
+<section>
+  <h2>🧱 Foundations</h2>
+  <div class="grid">
+    <div class="card"><img src="assets/anim/three-trees-flow.svg" alt="The three trees flow">
+      <div class="meta"><span class="name">The Three Trees</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/01-three-trees.md">module 01 →</a></div></div>
+    <div class="card"><img src="assets/anim/diff-scopes.svg" alt="diff vs diff --staged">
+      <div class="meta"><span class="name">diff vs. diff --staged</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/01-three-trees.md">module 01 →</a></div></div>
+  </div>
+</section>
+
+<section>
+  <h2>🔀 Combining history</h2>
+  <div class="grid">
+    <div class="card"><img src="assets/anim/branch-create-switch.svg" alt="Creating and switching a branch">
+      <div class="meta"><span class="name">Creating and switching a branch</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/02-branching-basics.md">module 02 →</a></div></div>
+    <div class="card"><img src="assets/anim/head-pointer.svg" alt="HEAD is a pointer to a pointer">
+      <div class="meta"><span class="name">HEAD is a pointer to a pointer</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/02-branching-basics.md">module 02 →</a></div></div>
+    <div class="card"><img src="assets/anim/fast-forward-merge.svg" alt="Fast-forward merge">
+      <div class="meta"><span class="name">Fast-forward merge</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/03-merging.md">module 03 →</a></div></div>
+    <div class="card"><img src="assets/anim/three-way-merge.svg" alt="Three-way merge">
+      <div class="meta"><span class="name">Three-way merge</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/03-merging.md">module 03 →</a></div></div>
+    <div class="card"><img src="assets/anim/rebase-replay.svg" alt="Rebase replays commits onto a new base">
+      <div class="meta"><span class="name">Rebase replays onto a new base</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/04-rebase.md">module 04 →</a></div></div>
+    <div class="card"><img src="assets/anim/rebase-onto.svg" alt="rebase --onto relocates a branch precisely">
+      <div class="meta"><span class="name">rebase --onto relocates precisely</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/04-rebase.md">module 04 →</a></div></div>
+    <div class="card"><img src="assets/anim/stack-build.svg" alt="Building a stack of branches">
+      <div class="meta"><span class="name">Building a stack of branches</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/05-stacked-branches.md">module 05 →</a></div></div>
+    <div class="card"><img src="assets/anim/stack-restack.svg" alt="Restacking after the base moves">
+      <div class="meta"><span class="name">Restacking after the base moves</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/05-stacked-branches.md">module 05 →</a></div></div>
+  </div>
+</section>
+
+<section>
+  <h2>🧰 Everyday tools</h2>
+  <div class="grid">
+    <div class="card"><img src="assets/anim/stash-cycle.svg" alt="Stash: a LIFO shelf for dirty work">
+      <div class="meta"><span class="name">Stash: a LIFO shelf</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/06-stashing.md">module 06 →</a></div></div>
+    <div class="card"><img src="assets/anim/stash-lifo.svg" alt="The stash list is a LIFO stack">
+      <div class="meta"><span class="name">The stash list is a LIFO stack</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/06-stashing.md">module 06 →</a></div></div>
+    <div class="card"><img src="assets/anim/cherry-pick.svg" alt="Cherry-pick copies one commit">
+      <div class="meta"><span class="name">Cherry-pick copies one commit</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/07-cherry-picking.md">module 07 →</a></div></div>
+  </div>
+</section>
+
+<section>
+  <h2>🧭 Strategy & safety</h2>
+  <div class="grid">
+    <div class="card"><img src="assets/anim/trunk-based.svg" alt="Trunk-based development">
+      <div class="meta"><span class="name">Trunk-based development</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/08-branching-strategies.md">module 08 →</a></div></div>
+    <div class="card"><img src="assets/anim/reset-modes.svg" alt="git reset --soft / --mixed / --hard">
+      <div class="meta"><span class="name">reset --soft / --mixed / --hard</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/09-undoing-things.md">module 09 →</a></div></div>
+    <div class="card"><img src="assets/anim/revert-vs-reset.svg" alt="Revert adds; reset rewrites">
+      <div class="meta"><span class="name">Revert adds; reset rewrites</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/09-undoing-things.md">module 09 →</a></div></div>
+  </div>
+</section>
+
+<section>
+  <h2>🌐 Collaboration & advanced</h2>
+  <div class="grid">
+    <div class="card"><img src="assets/anim/fetch-pull-push.svg" alt="Fetch, push and pull">
+      <div class="meta"><span class="name">Fetch, push and pull</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/10-remote-workflows.md">module 10 →</a></div></div>
+    <div class="card"><img src="assets/anim/upstream-tracking.svg" alt="Upstream tracking">
+      <div class="meta"><span class="name">Upstream tracking</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/10-remote-workflows.md">module 10 →</a></div></div>
+    <div class="card"><img src="assets/anim/bisect-search.svg" alt="Bisect binary-searches your history">
+      <div class="meta"><span class="name">Bisect binary-searches history</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/11-advanced-toolbox.md">module 11 →</a></div></div>
+    <div class="card"><img src="assets/anim/worktree-parallel.svg" alt="Worktree: several branches checked out at once">
+      <div class="meta"><span class="name">Worktree: several branches at once</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/11-advanced-toolbox.md">module 11 →</a></div></div>
+  </div>
+</section>
+
+<section>
+  <h2>📐 Blueprints</h2>
+  <p class="lede">One static anatomy diagram per module.</p>
+  <div class="grid wide">
+    <div class="card"><img src="assets/blueprint/01-three-trees.svg" alt="The Three Trees anatomy">
+      <div class="meta"><span class="name">01 · The Three Trees</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/01-three-trees.md">read →</a></div></div>
+    <div class="card"><img src="assets/blueprint/02-branching-basics.svg" alt="Branching anatomy">
+      <div class="meta"><span class="name">02 · Branching Basics</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/02-branching-basics.md">read →</a></div></div>
+    <div class="card"><img src="assets/blueprint/03-merging.svg" alt="Merging anatomy">
+      <div class="meta"><span class="name">03 · Merging</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/03-merging.md">read →</a></div></div>
+    <div class="card"><img src="assets/blueprint/04-rebase.svg" alt="Rebase anatomy">
+      <div class="meta"><span class="name">04 · Rebase</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/04-rebase.md">read →</a></div></div>
+    <div class="card"><img src="assets/blueprint/05-stacked-branches.svg" alt="Stacked branches anatomy">
+      <div class="meta"><span class="name">05 · Stacked Branches</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/05-stacked-branches.md">read →</a></div></div>
+    <div class="card"><img src="assets/blueprint/06-stashing.svg" alt="Stashing anatomy">
+      <div class="meta"><span class="name">06 · Stashing</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/06-stashing.md">read →</a></div></div>
+    <div class="card"><img src="assets/blueprint/07-cherry-picking.svg" alt="Cherry-picking anatomy">
+      <div class="meta"><span class="name">07 · Cherry-Picking</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/07-cherry-picking.md">read →</a></div></div>
+    <div class="card"><img src="assets/blueprint/08-branching-strategies.svg" alt="Branching strategies anatomy">
+      <div class="meta"><span class="name">08 · Branching Strategies</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/08-branching-strategies.md">read →</a></div></div>
+    <div class="card"><img src="assets/blueprint/09-undoing-things.svg" alt="Undoing things anatomy">
+      <div class="meta"><span class="name">09 · Undoing Things</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/09-undoing-things.md">read →</a></div></div>
+    <div class="card"><img src="assets/blueprint/10-remote-workflows.svg" alt="Remote workflows anatomy">
+      <div class="meta"><span class="name">10 · Remote Workflows</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/10-remote-workflows.md">read →</a></div></div>
+    <div class="card"><img src="assets/blueprint/11-advanced-toolbox.svg" alt="Advanced toolbox anatomy">
+      <div class="meta"><span class="name">11 · The Advanced Toolbox</span><a href="https://github.com/manojthati/git-visual-learning/blob/main/docs/11-advanced-toolbox.md">read →</a></div></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div>Learn Git — Visually · no dependencies · <a href="https://github.com/manojthati/git-visual-learning/blob/main/LICENSE">MIT licensed</a></div>
+  <div style="margin-top:6px"><a href="https://github.com/manojthati/git-visual-learning">github.com/manojthati/git-visual-learning</a></div>
+</footer>
+
+</body>
+</html>

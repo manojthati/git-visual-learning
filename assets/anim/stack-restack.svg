@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" width="720" height="300" role="img" aria-label="Animation: when feature-A changes, feature-B (and everything above it) must be rebased onto the new feature-A">
+  <title>Restacking after the base moves</title>
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.09"/>
+    </pattern>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#38bdf8"/></marker>
+    <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#34d399"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fb7185"/></marker>
+    <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c084fc"/></marker>
+  </defs>
+  <style>
+  text{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;dominant-baseline:middle}
+  .title{fill:#e2e8f0;font-size:17px;font-weight:700;dominant-baseline:auto}
+  .sub{fill:#94a3b8;font-size:12px;dominant-baseline:auto}
+  .lbl{fill:#94a3b8;font-size:11px;text-anchor:middle}
+  .lbl-l{fill:#94a3b8;font-size:11px}
+  .val{fill:#e2e8f0;font-size:13px;text-anchor:middle;font-weight:600}
+  .tiny{fill:#94a3b8;font-size:9.5px;text-anchor:middle}
+  .step{fill:#fbbf24;font-size:12px;font-weight:700}
+  .road{stroke-linecap:round;fill:none}
+  .dot{fill:#fff;stroke-width:3}
+  .tag{font-size:10px;font-weight:700;text-anchor:middle}
+  
+  .stale{animation:st 7s infinite}
+  .restacked{opacity:0;animation:rs 7s infinite}
+  @keyframes st{0%{opacity:1}36%{opacity:1}46%{opacity:0.2}100%{opacity:0.2}}
+  @keyframes a1{0%{opacity:0}30%{opacity:0}40%{opacity:1}60%{opacity:1}68%{opacity:0}100%{opacity:0}}
+  @keyframes rs{0%{opacity:0}56%{opacity:0}64%{opacity:1}100%{opacity:1}}
+
+  </style>
+  <rect x="0" y="0" width="720" height="300" rx="14" fill="#0b1c2c"/>
+  <rect x="0" y="0" width="720" height="300" rx="14" fill="url(#g)"/>
+  <rect x="0.75" y="0.75" width="718.5" height="298.5" rx="13.5" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.35"/>
+  <text class="title" x="24" y="34">Restacking after the base moves</text>
+  <text class="sub" x="24" y="54">Every branch above a changed one needs a fresh rebase</text>
+<path class="road" d="M40,250 L160,250" stroke="#34d399" stroke-width="13"/>
+<rect x="20" y="260" width="60" height="20" rx="10.0" fill="#34d399" fill-opacity="0.15" stroke="#34d399" stroke-width="1.6"/><text class="tag" x="50.0" y="271.0" fill="#34d399">main</text>
+<path class="road" d="M160,250 C 220,250 220,200 320,200" stroke="#fbbf24" stroke-width="12"/>
+<rect x="260" y="168" width="100" height="20" rx="10.0" fill="#fbbf24" fill-opacity="0.15" stroke="#fbbf24" stroke-width="1.6"/><text class="tag" x="310.0" y="179.0" fill="#fbbf24">feature-A</text>
+<g id="stale" class="stale">
+<path class="road" d="M320,200 C 380,200 380,150 480,150" stroke="#38bdf8" stroke-width="11"/>
+<circle class="dot" cx="400" cy="150" r="6" stroke="#38bdf8" stroke-width="2"/>
+</g>
+<text class="tiny" x="380" y="128" fill="#38bdf8" text-anchor="middle" >feature-B — stale, A moved under it</text>
+<g class="arrow1" style="opacity:0;animation:a1 7s infinite"><path d="M400,142 C 430,110 460,95 500,88" fill="none" stroke="#38bdf8" stroke-width="3" marker-end="url(#ar)"/></g>
+<g id="restacked" class="restacked">
+<path class="road" d="M320,200 C 400,200 400,88 520,88" stroke="#38bdf8" stroke-width="12"/>
+<circle class="dot" cx="470" cy="88" r="7" stroke="#38bdf8" stroke-width="3"/>
+<rect x="490" y="58" width="100" height="20" rx="10.0" fill="#38bdf8" fill-opacity="0.15" stroke="#38bdf8" stroke-width="1.6"/><text class="tag" x="540.0" y="69.0" fill="#38bdf8">feature-B</text>
+</g>
+<text class="lbl" x="360" y="272" text-anchor="middle" >git rebase feature-A   (run bottom-to-top across the whole stack)</text></svg>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 420" width="880" height="420" role="img" aria-label="Blueprint: Git Flow, GitHub Flow, trunk-based development and stacked PRs, compared side by side">
+  <title>Branching Strategies — anatomy</title>
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.09"/>
+    </pattern>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#38bdf8"/></marker>
+    <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#34d399"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fb7185"/></marker>
+    <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c084fc"/></marker>
+  </defs>
+  <style>
+  text{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;dominant-baseline:middle}
+  .title{fill:#e2e8f0;font-size:17px;font-weight:700;dominant-baseline:auto}
+  .sub{fill:#94a3b8;font-size:12px;dominant-baseline:auto}
+  .lbl{fill:#94a3b8;font-size:11px;text-anchor:middle}
+  .lbl-l{fill:#94a3b8;font-size:11px}
+  .val{fill:#e2e8f0;font-size:13px;text-anchor:middle;font-weight:600}
+  .tiny{fill:#94a3b8;font-size:9.5px;text-anchor:middle}
+  .step{fill:#fbbf24;font-size:12px;font-weight:700}
+  .road{stroke-linecap:round;fill:none}
+  .dot{fill:#fff;stroke-width:3}
+  .tag{font-size:10px;font-weight:700;text-anchor:middle}
+  
+  </style>
+  <rect x="0" y="0" width="880" height="420" rx="14" fill="#0b1c2c"/>
+  <rect x="0" y="0" width="880" height="420" rx="14" fill="url(#g)"/>
+  <rect x="0.75" y="0.75" width="878.5" height="418.5" rx="13.5" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.35"/>
+  <text class="title" x="24" y="34">Branching Strategies — anatomy</text>
+  <text class="sub" x="24" y="54">Four shapes you'll actually run into on real teams</text>
+<text class="lbl-l" x="24" y="96" >the commands never change — what changes between teams is the SHAPE they agree to keep history in</text>
+<rect x="60" y="130" width="360" height="120" rx="8" fill="#34d399" fill-opacity="0.08" stroke="#34d399" stroke-width="2"/>
+<text class="val" x="240.0" y="190.0" text-anchor="middle" >Git Flow</text>
+<text class="tiny" x="240" y="200" text-anchor="middle" >develop + release branches — heavy, versioned releases</text>
+<rect x="460" y="130" width="360" height="120" rx="8" fill="#fbbf24" fill-opacity="0.08" stroke="#fbbf24" stroke-width="2"/>
+<text class="val" x="640.0" y="190.0" text-anchor="middle" >GitHub Flow</text>
+<text class="tiny" x="640" y="200" text-anchor="middle" >one long branch + short-lived PRs — simple, continuous deploy</text>
+<rect x="60" y="290" width="360" height="120" rx="8" fill="#38bdf8" fill-opacity="0.08" stroke="#38bdf8" stroke-width="2"/>
+<text class="val" x="240.0" y="350.0" text-anchor="middle" >Trunk-Based</text>
+<text class="tiny" x="240" y="360" text-anchor="middle" >tiny direct commits + feature flags — needs strong CI</text>
+<rect x="460" y="290" width="360" height="120" rx="8" fill="#fb7185" fill-opacity="0.08" stroke="#fb7185" stroke-width="2"/>
+<text class="val" x="640.0" y="350.0" text-anchor="middle" >Stacked PRs</text>
+<text class="tiny" x="640" y="360" text-anchor="middle" >one big change as several small, dependent PRs</text></svg>

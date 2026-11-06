@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 220" width="720" height="220" role="img" aria-label="Diagram: git worktree lets one .git database back several independent working directories, each on its own branch, simultaneously">
+  <title>Worktree: several branches checked out at once</title>
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.09"/>
+    </pattern>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#38bdf8"/></marker>
+    <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#34d399"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fb7185"/></marker>
+    <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c084fc"/></marker>
+  </defs>
+  <style>
+  text{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;dominant-baseline:middle}
+  .title{fill:#e2e8f0;font-size:17px;font-weight:700;dominant-baseline:auto}
+  .sub{fill:#94a3b8;font-size:12px;dominant-baseline:auto}
+  .lbl{fill:#94a3b8;font-size:11px;text-anchor:middle}
+  .lbl-l{fill:#94a3b8;font-size:11px}
+  .val{fill:#e2e8f0;font-size:13px;text-anchor:middle;font-weight:600}
+  .tiny{fill:#94a3b8;font-size:9.5px;text-anchor:middle}
+  .step{fill:#fbbf24;font-size:12px;font-weight:700}
+  .road{stroke-linecap:round;fill:none}
+  .dot{fill:#fff;stroke-width:3}
+  .tag{font-size:10px;font-weight:700;text-anchor:middle}
+  
+  </style>
+  <rect x="0" y="0" width="720" height="220" rx="14" fill="#0b1c2c"/>
+  <rect x="0" y="0" width="720" height="220" rx="14" fill="url(#g)"/>
+  <rect x="0.75" y="0.75" width="718.5" height="218.5" rx="13.5" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.35"/>
+  <text class="title" x="24" y="34">Worktree: several branches checked out at once</text>
+  <text class="sub" x="24" y="54">No stash juggling to context-switch between them</text>
+<rect x="300" y="20" width="140" height="44" rx="8" fill="#c084fc" fill-opacity="0.12" stroke="#c084fc" stroke-width="2"/>
+<text class="val" x="370" y="46" >.git database</text>
+<path d="M370,64 L120,130" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="30" y="130" width="180" height="40" rx="8" fill="#34d399" fill-opacity="0.1" stroke="#34d399" stroke-width="2"/>
+<text class="tiny" x="120" y="154" fill="#34d399" >../repo (main)</text>
+<path d="M370,64 L370,130" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="280" y="130" width="180" height="40" rx="8" fill="#fbbf24" fill-opacity="0.1" stroke="#fbbf24" stroke-width="2"/>
+<text class="tiny" x="370" y="154" fill="#fbbf24" >../repo-hotfix (hotfix)</text>
+<path d="M370,64 L620,130" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="530" y="130" width="180" height="40" rx="8" fill="#38bdf8" fill-opacity="0.1" stroke="#38bdf8" stroke-width="2"/>
+<text class="tiny" x="620" y="154" fill="#38bdf8" >../repo-review (pr-42)</text>
+<text class="tiny" x="360" y="200" text-anchor="middle" >one repository, three real working directories checked out at once — no stashing to switch context</text></svg>

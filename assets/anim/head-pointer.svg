@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 260" width="720" height="260" role="img" aria-label="Animation: HEAD moves from main to feature/x when you switch branches">
+  <title>HEAD is a pointer to a pointer</title>
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.09"/>
+    </pattern>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#38bdf8"/></marker>
+    <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#34d399"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fb7185"/></marker>
+    <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c084fc"/></marker>
+  </defs>
+  <style>
+  text{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;dominant-baseline:middle}
+  .title{fill:#e2e8f0;font-size:17px;font-weight:700;dominant-baseline:auto}
+  .sub{fill:#94a3b8;font-size:12px;dominant-baseline:auto}
+  .lbl{fill:#94a3b8;font-size:11px;text-anchor:middle}
+  .lbl-l{fill:#94a3b8;font-size:11px}
+  .val{fill:#e2e8f0;font-size:13px;text-anchor:middle;font-weight:600}
+  .tiny{fill:#94a3b8;font-size:9.5px;text-anchor:middle}
+  .step{fill:#fbbf24;font-size:12px;font-weight:700}
+  .road{stroke-linecap:round;fill:none}
+  .dot{fill:#fff;stroke-width:3}
+  .tag{font-size:10px;font-weight:700;text-anchor:middle}
+  
+  .head-main{animation:hm 6s infinite}
+  .head-feat{opacity:0;animation:hf 6s infinite}
+  @keyframes hm{0%{opacity:1}46%{opacity:1}54%{opacity:0}100%{opacity:0}}
+  @keyframes hf{0%{opacity:0}54%{opacity:0}62%{opacity:1}100%{opacity:1}}
+
+  </style>
+  <rect x="0" y="0" width="720" height="260" rx="14" fill="#0b1c2c"/>
+  <rect x="0" y="0" width="720" height="260" rx="14" fill="url(#g)"/>
+  <rect x="0.75" y="0.75" width="718.5" height="258.5" rx="13.5" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.35"/>
+  <text class="title" x="24" y="34">HEAD is a pointer to a pointer</text>
+  <text class="sub" x="24" y="54">Switching branches just relabels which branch HEAD follows</text>
+<path class="road" d="M40,160 L620,160" stroke="#34d399" stroke-width="15"/>
+<circle class="dot" cx="140" cy="160" r="7" stroke="#34d399" stroke-width="3"/>
+<rect x="100" y="190" width="70" height="22" rx="11.0" fill="#34d399" fill-opacity="0.15" stroke="#34d399" stroke-width="1.6"/><text class="tag" x="135.0" y="202.0" fill="#34d399">main</text>
+<path class="road" d="M260,160 C 320,160 320,100 480,100" stroke="#fbbf24" stroke-width="12"/>
+<circle class="dot" cx="390" cy="100" r="7" stroke="#fbbf24" stroke-width="3"/>
+<rect x="360" y="128" width="110" height="22" rx="11.0" fill="#fbbf24" fill-opacity="0.15" stroke="#fbbf24" stroke-width="1.6"/><text class="tag" x="415.0" y="140.0" fill="#fbbf24">feature/x</text>
+<g id="head1" class="head-main"><path d="M140,190 L140,172" stroke="#e2e8f0" stroke-width="2" marker-end="url(#ar)"/><rect x="105" y="196" width="70" height="20" rx="10" fill="#e2e8f0" fill-opacity="0.15" stroke="#e2e8f0"/><text class="tag" x="140" y="210" fill="#e2e8f0">HEAD</text></g>
+<g id="head2" class="head-feat"><path d="M390,128 L390,110" stroke="#e2e8f0" stroke-width="2" marker-end="url(#ar)"/><rect x="355" y="100" width="70" height="20" rx="10" fill="#e2e8f0" fill-opacity="0.15" stroke="#e2e8f0"/><text class="tag" x="390" y="114" fill="#e2e8f0">HEAD</text></g>
+<text class="tiny" x="360" y="230" text-anchor="middle" >git switch feature/x  moves the HEAD label — nothing else changes</text></svg>

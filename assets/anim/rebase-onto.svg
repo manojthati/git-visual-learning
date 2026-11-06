@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 280" width="720" height="280" role="img" aria-label="Animation: rebase --onto moves feature-C from its old base directly onto feature-A, without replaying commits already folded into A">
+  <title>rebase --onto relocates a branch precisely</title>
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.09"/>
+    </pattern>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#38bdf8"/></marker>
+    <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#34d399"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fb7185"/></marker>
+    <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c084fc"/></marker>
+  </defs>
+  <style>
+  text{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;dominant-baseline:middle}
+  .title{fill:#e2e8f0;font-size:17px;font-weight:700;dominant-baseline:auto}
+  .sub{fill:#94a3b8;font-size:12px;dominant-baseline:auto}
+  .lbl{fill:#94a3b8;font-size:11px;text-anchor:middle}
+  .lbl-l{fill:#94a3b8;font-size:11px}
+  .val{fill:#e2e8f0;font-size:13px;text-anchor:middle;font-weight:600}
+  .tiny{fill:#94a3b8;font-size:9.5px;text-anchor:middle}
+  .step{fill:#fbbf24;font-size:12px;font-weight:700}
+  .road{stroke-linecap:round;fill:none}
+  .dot{fill:#fff;stroke-width:3}
+  .tag{font-size:10px;font-weight:700;text-anchor:middle}
+  
+  #oldc{animation:oc 6s infinite}
+  .movearrow{opacity:0;animation:ma 6s infinite}
+  .newc{opacity:0;animation:nc 6s infinite}
+  @keyframes oc{0%{opacity:1}34%{opacity:1}44%{opacity:0.2}100%{opacity:0.2}}
+  @keyframes ma{0%{opacity:0}30%{opacity:0}40%{opacity:1}60%{opacity:1}68%{opacity:0}100%{opacity:0}}
+  @keyframes nc{0%{opacity:0}56%{opacity:0}64%{opacity:1}100%{opacity:1}}
+
+  </style>
+  <rect x="0" y="0" width="720" height="280" rx="14" fill="#0b1c2c"/>
+  <rect x="0" y="0" width="720" height="280" rx="14" fill="url(#g)"/>
+  <rect x="0.75" y="0.75" width="718.5" height="278.5" rx="13.5" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.35"/>
+  <text class="title" x="24" y="34">rebase --onto relocates a branch precisely</text>
+  <text class="sub" x="24" y="54">Move only the commits unique to a branch, skip the rest</text>
+<path class="road" d="M40,200 L150,200" stroke="#34d399" stroke-width="14"/>
+<rect x="20" y="212" width="60" height="20" rx="10.0" fill="#34d399" fill-opacity="0.15" stroke="#34d399" stroke-width="1.6"/><text class="tag" x="50.0" y="223.0" fill="#34d399">main</text>
+<path class="road" d="M150,200 C 210,200 210,150 330,150" stroke="#fbbf24" stroke-width="12"/>
+<circle class="dot" cx="240" cy="150" r="7" stroke="#fbbf24" stroke-width="3"/>
+<rect x="260" y="118" width="100" height="20" rx="10.0" fill="#fbbf24" fill-opacity="0.15" stroke="#fbbf24" stroke-width="1.6"/><text class="tag" x="310.0" y="129.0" fill="#fbbf24">feature-A</text>
+<g id="oldc">
+<path class="road" d="M240,150 C 300,150 300,230 420,230" stroke="#c084fc" stroke-width="10"/>
+<circle class="dot" cx="350" cy="230" r="6" stroke="#c084fc" stroke-width="2"/>
+</g>
+<text class="tiny" x="300" y="255" fill="#c084fc" text-anchor="middle" >feature-C — old base</text>
+<g id="movearrow" class="movearrow"><path d="M350,220 C 420,150 460,100 500,85" fill="none" stroke="#c084fc" stroke-width="3" marker-end="url(#arv)"/></g>
+<g id="newc" class="newc">
+<path class="road" d="M330,150 C 400,150 400,85 520,85" stroke="#fbbf24" stroke-width="12"/>
+<circle class="dot" cx="460" cy="85" r="7" stroke="#c084fc" stroke-width="3"/>
+<rect x="480" y="55" width="100" height="20" rx="10.0" fill="#c084fc" fill-opacity="0.15" stroke="#c084fc" stroke-width="1.6"/><text class="tag" x="530.0" y="66.0" fill="#c084fc">feature-C</text>
+</g>
+<text class="lbl" x="360" y="262" text-anchor="middle" >git rebase --onto feature-A old-base feature-C</text></svg>

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 220" width="720" height="220" role="img" aria-label="Animation: commits land directly and frequently on trunk, one after another, with no long-lived feature branches">
+  <title>Trunk-based development</title>
+  <defs>
+    <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#38bdf8" stroke-width="0.5" opacity="0.09"/>
+    </pattern>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#38bdf8"/></marker>
+    <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fbbf24"/></marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#34d399"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#fb7185"/></marker>
+    <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c084fc"/></marker>
+  </defs>
+  <style>
+  text{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;dominant-baseline:middle}
+  .title{fill:#e2e8f0;font-size:17px;font-weight:700;dominant-baseline:auto}
+  .sub{fill:#94a3b8;font-size:12px;dominant-baseline:auto}
+  .lbl{fill:#94a3b8;font-size:11px;text-anchor:middle}
+  .lbl-l{fill:#94a3b8;font-size:11px}
+  .val{fill:#e2e8f0;font-size:13px;text-anchor:middle;font-weight:600}
+  .tiny{fill:#94a3b8;font-size:9.5px;text-anchor:middle}
+  .step{fill:#fbbf24;font-size:12px;font-weight:700}
+  .road{stroke-linecap:round;fill:none}
+  .dot{fill:#fff;stroke-width:3}
+  .tag{font-size:10px;font-weight:700;text-anchor:middle}
+  
+  #c0{opacity:0;animation:k0 7s infinite}
+  #c1{opacity:0;animation:k1 7s infinite}
+  #c2{opacity:0;animation:k2 7s infinite}
+  #c3{opacity:0;animation:k3 7s infinite}
+  #c4{opacity:0;animation:k4 7s infinite}
+  #c5{opacity:0;animation:k5 7s infinite}
+  #c6{opacity:0;animation:k6 7s infinite}
+  @keyframes k0{0%{opacity:0}0%{opacity:0}6%{opacity:1}100%{opacity:1}}
+  @keyframes k1{0%{opacity:0}6%{opacity:0}12%{opacity:1}100%{opacity:1}}
+  @keyframes k2{0%{opacity:0}12%{opacity:0}18%{opacity:1}100%{opacity:1}}
+  @keyframes k3{0%{opacity:0}18%{opacity:0}24%{opacity:1}100%{opacity:1}}
+  @keyframes k4{0%{opacity:0}24%{opacity:0}30%{opacity:1}100%{opacity:1}}
+  @keyframes k5{0%{opacity:0}30%{opacity:0}36%{opacity:1}100%{opacity:1}}
+  @keyframes k6{0%{opacity:0}36%{opacity:0}42%{opacity:1}100%{opacity:1}}
+  </style>
+  <rect x="0" y="0" width="720" height="220" rx="14" fill="#0b1c2c"/>
+  <rect x="0" y="0" width="720" height="220" rx="14" fill="url(#g)"/>
+  <rect x="0.75" y="0.75" width="718.5" height="218.5" rx="13.5" fill="none" stroke="#38bdf8" stroke-width="1.5" opacity="0.35"/>
+  <text class="title" x="24" y="34">Trunk-based development</text>
+  <text class="sub" x="24" y="54">Safety comes from flags and fast CI, not branch isolation</text>
+<path class="road" d="M40,120 L660,120" stroke="#34d399" stroke-width="14"/>
+<g id="c0" class="c0"><circle class="dot" cx="100" cy="120" r="7" stroke="#34d399" stroke-width="3"/></g>
+<g id="c1" class="c1"><circle class="dot" cx="180" cy="120" r="7" stroke="#34d399" stroke-width="3"/></g>
+<g id="c2" class="c2"><circle class="dot" cx="260" cy="120" r="7" stroke="#34d399" stroke-width="3"/></g>
+<g id="c3" class="c3"><circle class="dot" cx="340" cy="120" r="7" stroke="#34d399" stroke-width="3"/></g>
+<g id="c4" class="c4"><circle class="dot" cx="420" cy="120" r="7" stroke="#34d399" stroke-width="3"/></g>
+<g id="c5" class="c5"><circle class="dot" cx="500" cy="120" r="7" stroke="#34d399" stroke-width="3"/></g>
+<g id="c6" class="c6"><circle class="dot" cx="580" cy="120" r="7" stroke="#34d399" stroke-width="3"/></g>
+<text class="lbl" x="360" y="60" text-anchor="middle" >many small direct commits straight to trunk</text>
+<text class="tiny" x="360" y="170" text-anchor="middle" >unfinished work hides behind a feature flag, not a branch</text></svg>
