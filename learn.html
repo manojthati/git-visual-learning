@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Learn Git Visually — reader</title>
+<meta name="description" content="Eleven illustrated git modules: three trees, branching, merging, rebase, stacked branches, stash, cherry-pick, strategies, undoing, remotes and advanced tools.">
+<meta property="og:title" content="Learn Git — Visually">
+<meta property="og:type" content="article">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23071320'/%3E%3Cpath d='M10 7v18M10 16c0-5 12-4 12-9' stroke='%2338bdf8' stroke-width='2.6' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='10' cy='25' r='3.2' fill='%2334d399'/%3E%3Ccircle cx='22' cy='7' r='3.2' fill='%23fbbf24'/%3E%3C/svg%3E">
 <style>
   :root{
     --bg:#071320; --panel:#0b1c2c; --card:#0d2233; --ink:#e2e8f0; --slate:#94a3b8;
@@ -97,6 +101,13 @@
     color:var(--ink);background:var(--card)}
   .pager a small{display:block;color:var(--slate);font-family:var(--mono);font-size:11px}
   .pager a.next{text-align:right}
+  .tryit{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:0 0 22px;
+    padding:14px 16px;border:1px solid rgba(251,191,36,.45);background:rgba(251,191,36,.07);border-radius:12px}
+  .tryit b{color:var(--amber)} .tryit span{color:#cbd5e1;font-size:14px}
+  .tryit .btn{border-color:var(--amber);color:var(--amber)}
+  .top .nl{color:var(--slate);text-decoration:none} .top .nl:hover{color:var(--ink)}
+  .keys{color:var(--slate);font:11px var(--mono);margin-top:10px}
+  .keys kbd{border:1px solid var(--edge);border-radius:4px;padding:0 5px}
   .src{margin-top:26px;font-size:12px;color:var(--slate);font-family:var(--mono)}
   .loading,.err{color:var(--slate);font-family:var(--mono);padding:40px 0}
 
@@ -115,6 +126,7 @@
 <div class="top">
   <button class="menu-btn" id="menuBtn" aria-label="Show modules">☰</button>
   <a class="home" href="./">⎇ Learn Git — Visually</a>
+  <a class="nl" href="playground.html">Playground</a>
   <span class="spacer"></span>
   <span class="chip score" id="scoreChip" hidden></span>
   <span class="chip" id="progChip"></span>
@@ -153,6 +165,20 @@
     ["quiz","❓","Quiz bank"],
     ["cheatsheet-commands","📋","Command cheat sheet"]
   ];
+  var TRY = {
+    "00-how-to-read-this":["first-commits","Make your first commits"],
+    "01-three-trees":["three-trees","Walk a change through the three trees"],
+    "02-branching-basics":["branching","Create a branch and commit on it"],
+    "03-merging":["ff-merge","Fast-forward, then a three-way merge"],
+    "04-rebase":["rebase","Rebase a branch into a straight line"],
+    "05-stacked-branches":["restack","Restack a branch after its base moves"],
+    "06-stashing":["stash","Stash your work to ship a hotfix"],
+    "07-cherry-picking":["cherry-pick","Cherry-pick a single fix"],
+    "08-branching-strategies":["three-way","Merge two diverged branches"],
+    "09-undoing-things":["reset","Undo with reset, then with revert"],
+    "10-remote-workflows":["revert","Undo a commit that's already pushed"],
+    "11-advanced-toolbox":["reflog","Rescue lost work with reflog"]
+  };
   var ALL = MODULES.concat(PRACTICE);
   var known = {}; ALL.forEach(function(m){ known[m[0]] = m; });
 
@@ -165,6 +191,7 @@
   var slug = params.get("m") || MODULES[0][0];
   if(!known[slug]) slug = MODULES[0][0];
   var current = known[slug];
+  save("last", slug);
 
   // ---------- sidebar
   var side = document.getElementById("side");
@@ -286,6 +313,8 @@
         (prev ? '<a href="learn.html?m=' + prev[0] + '"><small>← previous</small>' + prev[1] + " · " + prev[2] + '</a>' : "<span></span>") +
         '<a class="next" href="learn.html?m=' + next[0] + '"><small>next →</small>' + (next[1].length < 3 && /\d/.test(next[1]) ? next[1] + " · " : "") + next[2] + '</a></div>';
     }
+    if(TRY[slug]) html += '<div class="done-box"><span>🧪 Practice what you just read: <b style="color:var(--amber)">' + TRY[slug][1] + '</b></span><a class="btn" href="playground.html?c=' + TRY[slug][0] + '">Open the playground →</a></div>';
+    html += '<div class="keys">Keyboard: <kbd>←</kbd> previous · <kbd>→</kbd> next</div>';
     html += '<div class="src">Source: <a href="' + REPO + 'docs/' + slug + '.md" target="_blank" rel="noopener">docs/' + slug + '.md on GitHub</a></div>';
     after.innerHTML = html;
     var btn = document.getElementById("doneBtn");
@@ -294,6 +323,14 @@
       save("done", done); renderSide(); footer();
     };
   }
+
+  // ---------- keyboard: ← / → between modules
+  addEventListener("keydown", function(e){
+    if(e.altKey || e.ctrlKey || e.metaKey || /input|textarea|select/i.test((e.target.tagName || ""))) return;
+    var i = ALL.findIndex(function(m){ return m[0] === slug; });
+    if(e.key === "ArrowRight" && ALL[i+1]) location.href = "learn.html?m=" + ALL[i+1][0];
+    if(e.key === "ArrowLeft" && ALL[i-1]) location.href = "learn.html?m=" + ALL[i-1][0];
+  });
 
   // ---------- reading progress bar
   addEventListener("scroll", function(){
@@ -324,6 +361,15 @@
     };
     doc.innerHTML = marked.parse(md, {renderer: renderer, gfm: true});
     rewrite(doc);
+    if(TRY[slug]){
+      var pgDone = load("pg", {});
+      var box = document.createElement("div"); box.className = "tryit";
+      box.innerHTML = '<span><b>🧪 Try it yourself</b> · </span><a class="btn" href="playground.html?c=' + TRY[slug][0] + '">' +
+        (pgDone[TRY[slug][0]] ? "✓ Solved · play again" : "Open the playground") + " →</a>";
+      box.firstChild.appendChild(document.createTextNode(TRY[slug][1] + " in a live git sandbox."));
+      var h1 = doc.querySelector("h1");
+      if(h1 && h1.nextSibling) doc.insertBefore(box, h1.nextElementSibling); else doc.prepend(box);
+    }
     addCopyButtons(doc);
     addGrading(doc);
     footer();

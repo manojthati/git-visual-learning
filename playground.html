@@ -1,0 +1,829 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Git Playground — Learn Git Visually</title>
+<meta name="description" content="Type real git commands and watch the commit graph change. Twelve hands-on challenges: branching, merging, rebasing, stashing, cherry-picking, reset, revert and reflog.">
+<meta property="og:title" content="Git Playground — Learn Git Visually">
+<meta property="og:description" content="Type real git commands and watch the commit graph change, with twelve hands-on challenges.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23071320'/%3E%3Cpath d='M10 7v18M10 16c0-5 12-4 12-9' stroke='%2338bdf8' stroke-width='2.6' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='10' cy='25' r='3.2' fill='%2334d399'/%3E%3Ccircle cx='22' cy='7' r='3.2' fill='%23fbbf24'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#071320; --panel:#0b1c2c; --card:#0d2233; --ink:#e2e8f0; --slate:#94a3b8; --dim:#64748b;
+    --cyan:#38bdf8; --amber:#fbbf24; --green:#34d399; --rose:#fb7185; --violet:#c084fc;
+    --edge:rgba(56,189,248,.25);
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.55}
+  a{color:var(--cyan)}
+  button{font:inherit}
+  .top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    padding:10px 16px;background:rgba(7,19,32,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--edge);
+    font-family:var(--mono);font-size:13px}
+  .top a{color:var(--slate);text-decoration:none}
+  .top a:hover{color:var(--ink)}
+  .top .home{color:var(--ink);font-weight:600}
+  .top .spacer{flex:1}
+  .chip{border:1px solid var(--edge);border-radius:999px;padding:3px 12px;color:var(--slate);white-space:nowrap}
+  .chip b{color:var(--ink)}
+
+  .layout{display:grid;grid-template-columns:290px minmax(0,1fr);gap:0;max-width:1500px;margin:0 auto;min-height:calc(100vh - 49px)}
+  aside{border-right:1px solid var(--edge);padding:18px 14px 40px;font-size:13px}
+  aside h3{font:600 11px var(--mono);letter-spacing:1.5px;text-transform:uppercase;color:var(--slate);margin:0 6px 10px}
+  .clist button{display:flex;width:100%;gap:9px;align-items:baseline;text-align:left;background:none;border:0;
+    color:var(--slate);padding:7px 8px;border-radius:8px;cursor:pointer;font-size:13px}
+  .clist button:hover{background:var(--card);color:var(--ink)}
+  .clist button.on{background:var(--card);color:var(--ink);box-shadow:inset 2px 0 0 var(--cyan)}
+  .clist .n{font:11px var(--mono);color:var(--dim);width:18px;flex:none}
+  .clist .t{width:14px;flex:none;color:var(--green)}
+  .track{height:5px;border-radius:9px;background:var(--card);margin:12px 8px 0;overflow:hidden}
+  .track i{display:block;height:100%;background:var(--green);width:0;transition:width .3s}
+  .prog{margin:6px 8px 0;color:var(--slate);font:12px var(--mono)}
+
+  main{padding:18px clamp(12px,2.4vw,28px) 60px;min-width:0;display:flex;flex-direction:column;gap:16px}
+  .task{background:var(--card);border:1px solid var(--edge);border-radius:14px;padding:16px 18px}
+  .task .kicker{font:11px var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--cyan)}
+  .task h1{font-size:22px;margin:4px 0 6px;letter-spacing:-.3px}
+  .task .goal{color:#cbd5e1;margin:0}
+  .task .goal code,.hint code,.help code{font-family:var(--mono);font-size:.9em;background:var(--panel);padding:1px 6px;border-radius:5px;color:#e0f2fe}
+  .task .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}
+  .btn{cursor:pointer;border-radius:9px;padding:7px 14px;border:1px solid var(--edge);background:transparent;color:var(--slate);font:12px var(--mono);text-decoration:none}
+  .btn:hover{color:var(--ink);border-color:var(--cyan)}
+  .btn.primary{border-color:var(--cyan);color:var(--cyan)}
+  .hint{margin-top:12px;padding:10px 14px;border-left:3px solid var(--amber);background:rgba(251,191,36,.06);border-radius:0 10px 10px 0;color:#cbd5e1;font-size:14px}
+  .win{margin-top:12px;padding:12px 14px;border:1px solid rgba(52,211,153,.55);background:rgba(52,211,153,.08);border-radius:10px;color:var(--green);display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .win .btn{border-color:var(--green);color:var(--green)}
+  .status{font:12px var(--mono);color:var(--slate)}
+  .status.ok{color:var(--green)}
+
+  .stage{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:16px}
+  .panel{background:var(--panel);border:1px solid var(--edge);border-radius:14px;overflow:hidden}
+  .panel .ph{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;border-bottom:1px solid var(--edge);
+    font:11px var(--mono);letter-spacing:1.3px;text-transform:uppercase;color:var(--slate)}
+  .graph{overflow:auto;min-height:230px;max-height:420px}
+  .graph svg{display:block}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;padding:8px 14px;border-top:1px solid var(--edge);font:11px var(--mono);color:var(--slate)}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+
+  .trees{padding:12px 14px;display:flex;flex-direction:column;gap:10px;font:12px var(--mono)}
+  .tree{border:1px solid var(--edge);border-radius:10px;padding:8px 10px}
+  .tree .lbl{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:4px}
+  .tree.w .lbl{color:var(--cyan)} .tree.s .lbl{color:var(--amber)} .tree.r .lbl{color:var(--green)} .tree.st .lbl{color:var(--violet)}
+  .tree .f{color:var(--ink);word-break:break-all}
+  .tree .none{color:var(--dim)}
+  .arrow{text-align:center;color:var(--dim);font-size:11px;margin:-4px 0}
+
+  .term{background:#050e18;font:13px/1.55 var(--mono);display:flex;flex-direction:column}
+  .out{padding:12px 14px 4px;height:260px;overflow:auto;white-space:pre-wrap;word-break:break-word}
+  .out .cmd{color:var(--ink)} .out .cmd .p{color:var(--green)}
+  .out .err{color:var(--rose)} .out .ok{color:var(--green)} .out .dim{color:var(--slate)} .out .hl{color:var(--amber)}
+  .inrow{display:flex;align-items:center;gap:8px;padding:8px 14px 12px;border-top:1px solid rgba(56,189,248,.12)}
+  .inrow .p{color:var(--green);white-space:nowrap}
+  .inrow input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:var(--ink);font:inherit;caret-color:var(--amber)}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;padding:0 14px 12px}
+  .chips button{cursor:pointer;background:var(--card);border:1px solid var(--edge);color:var(--slate);border-radius:7px;padding:3px 9px;font:11px var(--mono)}
+  .chips button:hover{color:var(--ink);border-color:var(--cyan)}
+
+  @keyframes pop{0%{transform:scale(.2);opacity:0}70%{transform:scale(1.25)}100%{transform:scale(1);opacity:1}}
+  .node.pop{animation:pop .45s ease-out;transform-box:fill-box;transform-origin:center}
+
+  @media (max-width:980px){
+    .layout{grid-template-columns:minmax(0,1fr)}
+    aside{min-width:0}
+    aside{border-right:0;border-bottom:1px solid var(--edge)}
+    .clist{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
+    .clist button{width:auto;white-space:nowrap;border:1px solid var(--edge)}
+    .track,.prog{display:none}
+    .stage{grid-template-columns:minmax(0,1fr)}
+    .panel{min-width:0}
+  }
+</style>
+</head>
+<body>
+
+<div class="top">
+  <a class="home" href="./">⎇ Learn Git — Visually</a>
+  <a href="learn.html">Modules</a>
+  <a href="playground.html" style="color:var(--ink)">Playground</a>
+  <span class="spacer"></span>
+  <span class="chip" id="doneChip"></span>
+</div>
+
+<div class="layout">
+  <aside>
+    <h3>Challenges</h3>
+    <div class="clist" id="clist"></div>
+    <div class="track"><i id="trackBar"></i></div>
+    <div class="prog" id="progTxt"></div>
+  </aside>
+
+  <main>
+    <section class="task" id="task"></section>
+
+    <div class="stage">
+      <div class="panel">
+        <div class="ph"><span>Commit graph</span><span id="headInfo"></span></div>
+        <div class="graph" id="graph"></div>
+        <div class="legend">
+          <span><i style="background:var(--amber)"></i>HEAD</span>
+          <span><i style="background:var(--green)"></i>branch</span>
+          <span><i style="background:var(--violet)"></i>tag</span>
+          <span><i style="background:#64748b"></i>remote / unreachable</span>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="ph"><span>The three trees</span></div>
+        <div class="trees" id="trees"></div>
+      </div>
+    </div>
+
+    <div class="panel term">
+      <div class="ph"><span>Terminal</span><span>↑ ↓ history · type <b>help</b></span></div>
+      <div class="out" id="out" aria-live="polite"></div>
+      <div class="inrow"><span class="p" id="prompt">(main) $</span>
+        <input id="cmd" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Type a git command" placeholder="git commit -m &quot;my first commit&quot;"></div>
+      <div class="chips" id="chips"></div>
+    </div>
+  </main>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  // ================================================================ simulator
+  var S;
+  var LANE_COLORS = ["#34d399","#38bdf8","#c084fc","#fbbf24","#fb7185","#2dd4bf","#a3e635"];
+
+  function hash(n){
+    var x = Math.imul(n + 7, 2654435761) >>> 0;
+    x ^= x >>> 13; x = Math.imul(x, 0x5bd1e995) >>> 0; x ^= x >>> 15;
+    return ("0000000" + (x >>> 0).toString(16)).slice(-7);
+  }
+  function fresh(){
+    return {commits:{}, order:[], branches:{}, tags:{}, head:{branch:"main"}, laneTip:{}, maxLane:-1,
+      work:[], staged:[], stash:[], stashUsed:false, reflog:[], n:0};
+  }
+  function headId(){ return S.head.branch ? S.branches[S.head.branch] : S.head.id; }
+  function mk(parents, msg, files, extra){
+    var id = hash(S.n++);
+    while(S.commits[id]) id = hash(S.n++);
+    var lane, p = parents[0];
+    if(p === undefined){ lane = 0; }
+    else {
+      var pl = S.commits[p].lane;
+      // keep main on its own lane: other branches leaving main's tip get a fresh lane
+      var leavesMain = p === S.branches.main && S.head.branch !== "main";
+      if(S.laneTip[pl] === p && !leavesMain) lane = pl; else lane = ++S.maxLane;
+    }
+    if(lane > S.maxLane) S.maxLane = lane;
+    S.laneTip[lane] = id;
+    var c = {id:id, parents:parents.slice(), msg:msg, files:(files||[]).slice(), lane:lane, col:S.order.length};
+    if(extra) for(var k in extra) c[k] = extra[k];
+    S.commits[id] = c; S.order.push(id);
+    return id;
+  }
+  function moveHead(id, why){
+    if(S.head.branch) S.branches[S.head.branch] = id; else S.head.id = id;
+    S.reflog.unshift({id:id, why:why});
+  }
+  function ancestors(id){
+    var seen = new Set(), st = id ? [id] : [];
+    while(st.length){ var c = st.pop(); if(seen.has(c)) continue; seen.add(c); S.commits[c].parents.forEach(function(p){ st.push(p); }); }
+    return seen;
+  }
+  function isAnc(a, b){ return ancestors(b).has(a); }
+  function reachable(){
+    var r = new Set();
+    function add(id){ ancestors(id).forEach(function(x){ r.add(x); }); }
+    Object.keys(S.branches).forEach(function(b){ add(S.branches[b]); });
+    Object.keys(S.tags).forEach(function(t){ add(S.tags[t]); });
+    add(headId());
+    return r;
+  }
+  function byPrefix(p){
+    if(!/^[0-9a-f]{4,}$/.test(p)) return null;
+    var hits = S.order.filter(function(id){ return id.indexOf(p) === 0; });
+    return hits.length === 1 ? hits[0] : null;
+  }
+  function resolve(ref){
+    if(!ref) return null;
+    var m = ref.match(/^(.*?)((?:[~^]\d*)*)$/), base = m[1], suf = m[2];
+    var id = (base === "HEAD" || base === "@") ? headId()
+      : (S.branches[base] || S.tags[base] || byPrefix(base));
+    if(!id) return null;
+    var ops = suf.match(/[~^]\d*/g) || [];
+    for(var i = 0; i < ops.length; i++){
+      var op = ops[i], n = op.length > 1 ? parseInt(op.slice(1), 10) : 1;
+      if(op[0] === "~"){ for(var j = 0; j < n; j++){ id = S.commits[id].parents[0]; if(!id) return null; } }
+      else { if(n === 0) continue; id = S.commits[id].parents[n-1]; if(!id) return null; }
+    }
+    return id;
+  }
+  function firstParentChain(id){ var out = []; while(id){ out.push(id); id = S.commits[id].parents[0]; } return out; }
+  function short(id){ return id + " " + S.commits[id].msg; }
+  function uniqPush(arr, items){ items.forEach(function(f){ if(arr.indexOf(f) < 0) arr.push(f); }); }
+  function refsAt(id){
+    var r = [];
+    if(!S.head.branch && S.head.id === id) r.push("HEAD");
+    Object.keys(S.branches).forEach(function(b){ if(S.branches[b] === id) r.push(S.head.branch === b ? "HEAD -> " + b : b); });
+    Object.keys(S.tags).forEach(function(t){ if(S.tags[t] === id) r.push("tag: " + t); });
+    return r;
+  }
+  function validName(n){ return /^[A-Za-z0-9][A-Za-z0-9._\/-]*$/.test(n) && !/\.\.|\/\/|\/$|\.lock$/.test(n) && n !== "HEAD"; }
+
+  // ================================================================ commands
+  function tokenize(line){
+    var re = /"([^"]*)"|'([^']*)'|(\S+)/g, out = [], m;
+    while((m = re.exec(line))) out.push(m[1] !== undefined ? m[1] : m[2] !== undefined ? m[2] : m[3]);
+    return out;
+  }
+  function E(msg){ var e = new Error(msg); e.git = true; throw e; }
+  function need(ref){ var id = resolve(ref); if(!id) E("fatal: '" + ref + "' is not a commit, branch or tag here."); return id; }
+  function nextMsg(){ return "commit " + (S.order.length + 1); }
+
+  var git = {
+    help: function(){ return HELP; },
+    commit: function(a){
+      var msg = null, all = false, amend = false;
+      for(var i = 0; i < a.length; i++){
+        var t = a[i];
+        if(t === "-m" || t === "--message"){ msg = a[++i]; }
+        else if(t === "-a" || t === "--all"){ all = true; }
+        else if(t === "-am" || t === "-ma"){ all = true; msg = a[++i]; }
+        else if(t === "--amend"){ amend = true; }
+        else if(t === "--allow-empty" || t === "--no-edit"){}
+        else E("error: unknown option '" + t + "' (this playground supports -m, -a, --amend)");
+      }
+      if(all){ uniqPush(S.staged, S.work); S.work = []; }
+      if(!S.staged.length && S.work.length && !amend)
+        E("no changes added to commit (use \"git add <file>\" or \"git commit -a\")");
+      var h = headId();
+      if(amend){
+        var old = S.commits[h];
+        if(msg === null) msg = old.msg;
+        var files = old.files.slice(); uniqPush(files, S.staged);
+        var id = mk(old.parents, msg, files); S.staged = [];
+        moveHead(id, "commit (amend): " + msg);
+        return ["[" + label() + " " + id + "] " + msg, {dim:"amend makes a NEW commit; " + h + " is now unreachable (see it faded in the graph)."}];
+      }
+      if(msg === null) msg = nextMsg();
+      var files2 = S.staged.slice(); S.staged = [];
+      var id2 = mk([h], msg, files2);
+      moveHead(id2, "commit: " + msg);
+      var lines = ["[" + label() + " " + id2 + "] " + msg];
+      lines.push(files2.length ? " " + files2.length + " file" + (files2.length > 1 ? "s" : "") + " changed: " + files2.join(", ") : {dim:" (no files staged; the playground allows empty commits so you can focus on the graph)"});
+      return lines;
+    },
+    add: function(a){
+      if(!a.length) E("Nothing specified, nothing added. Try: git add <file>  or  git add .");
+      if(a.indexOf(".") >= 0 || a.indexOf("-A") >= 0 || a.indexOf("--all") >= 0){
+        if(!S.work.length) return [{dim:"(nothing to add; the working directory is clean)"}];
+        var moved = S.work.slice(); uniqPush(S.staged, S.work); S.work = [];
+        return [{dim:"staged: " + moved.join(", ")}];
+      }
+      a.forEach(function(f){
+        var i = S.work.indexOf(f);
+        if(i < 0) E("fatal: pathspec '" + f + "' did not match any changed files. Make a change first: edit " + f);
+        S.work.splice(i, 1); uniqPush(S.staged, [f]);
+      });
+      return [{dim:"staged: " + a.join(", ")}];
+    },
+    status: function(){
+      var out = [S.head.branch ? "On branch " + S.head.branch : {hl:"HEAD detached at " + S.head.id}];
+      if(S.staged.length){ out.push("Changes to be committed:"); S.staged.forEach(function(f){ out.push({ok:"\tmodified:   " + f}); }); }
+      if(S.work.length){ out.push("Changes not staged for commit:"); S.work.forEach(function(f){ out.push({err:"\tmodified:   " + f}); }); }
+      if(!S.staged.length && !S.work.length) out.push("nothing to commit, working tree clean");
+      if(S.stash.length) out.push({dim:"(" + S.stash.length + " stash entr" + (S.stash.length > 1 ? "ies" : "y") + " saved; see git stash list)"});
+      return out;
+    },
+    diff: function(a){
+      var staged = a.indexOf("--staged") >= 0 || a.indexOf("--cached") >= 0;
+      var list = staged ? S.staged : S.work;
+      if(!list.length) return [{dim:staged ? "(no staged changes; git diff --staged compares staging ↔ last commit)" : "(no unstaged changes; git diff compares working dir ↔ staging)"}];
+      return list.map(function(f){ return {hl:(staged ? "staged   " : "unstaged ") + f}; });
+    },
+    branch: function(a){
+      if(!a.length || a[0] === "--list" || a[0] === "-a"){
+        return Object.keys(S.branches).sort().map(function(b){
+          return S.head.branch === b ? {ok:"* " + b} : "  " + b; }).concat(S.head.branch ? [] : [{hl:"* (HEAD detached at " + S.head.id + ")"}]);
+      }
+      if(a[0] === "-d" || a[0] === "-D" || a[0] === "--delete"){
+        var n = a[1]; if(!S.branches[n]) E("error: branch '" + n + "' not found.");
+        if(S.head.branch === n) E("error: cannot delete branch '" + n + "' while you are on it. Switch away first.");
+        if(a[0] !== "-D" && !isAnc(S.branches[n], headId()))
+          E("error: the branch '" + n + "' is not fully merged.\nIf you are sure you want to delete it, run 'git branch -D " + n + "'.");
+        var was = S.branches[n]; delete S.branches[n];
+        return ["Deleted branch " + n + " (was " + was + ")."];
+      }
+      if(a[0] === "-m" || a[0] === "-M"){
+        var from = a.length > 2 ? a[1] : S.head.branch, to = a.length > 2 ? a[2] : a[1];
+        if(!from || !S.branches[from]) E("error: no branch to rename.");
+        if(!validName(to)) E("fatal: '" + to + "' is not a valid branch name.");
+        S.branches[to] = S.branches[from]; delete S.branches[from];
+        if(S.head.branch === from) S.head.branch = to;
+        return [{dim:"renamed " + from + " → " + to}];
+      }
+      if(a[0].charAt(0) === "-") E("error: unsupported option " + a[0]);
+      var name = a[0];
+      if(!validName(name)) E("fatal: '" + name + "' is not a valid branch name.");
+      if(S.branches[name]) E("fatal: a branch named '" + name + "' already exists.");
+      S.branches[name] = a[1] ? need(a[1]) : headId();
+      return [{dim:"created branch " + name + " at " + S.branches[name] + ". You are still on " + label() + "; use git switch " + name + " to move onto it."}];
+    },
+    switch: function(a){
+      if(a[0] === "-c" || a[0] === "-C" || a[0] === "--create"){
+        git.branch([a[1]].concat(a[2] ? [a[2]] : []));
+        return attach(a[1], "Switched to a new branch '" + a[1] + "'");
+      }
+      if(a[0] === "--detach" || a[0] === "-d"){ return detach(need(a[1] || "HEAD")); }
+      if(a[0] === "-"){ return switchBack(); }
+      if(!a[0]) E("fatal: missing branch name. Try: git switch <branch>");
+      if(!S.branches[a[0]]){
+        if(resolve(a[0])) E("fatal: a branch is expected, got commit '" + a[0] + "'.\nhint: use git switch --detach " + a[0] + " (or git checkout " + a[0] + ") to look at a single commit.");
+        E("fatal: invalid reference: " + a[0] + "\nhint: create it with git switch -c " + a[0]);
+      }
+      return attach(a[0], "Switched to branch '" + a[0] + "'");
+    },
+    checkout: function(a){
+      if(a[0] === "-b" || a[0] === "-B") return git.switch(["-c"].concat(a.slice(1)));
+      if(a[0] === "--"){ return git.restore(a.slice(1)); }
+      if(a[0] === "-"){ return switchBack(); }
+      if(!a[0]) E("fatal: you must specify a branch or commit");
+      if(S.branches[a[0]]) return attach(a[0], "Switched to branch '" + a[0] + "'");
+      var id = resolve(a[0]);
+      if(id) return detach(id);
+      if(S.work.indexOf(a[0]) >= 0) return git.restore(a);
+      E("error: pathspec '" + a[0] + "' did not match any branch, commit or file.");
+    },
+    restore: function(a){
+      if(a[0] === "--staged"){
+        a.slice(1).forEach(function(f){
+          var i = S.staged.indexOf(f); if(i < 0 && f !== ".") E("error: '" + f + "' is not staged.");
+        });
+        var fs = a[1] === "." ? S.staged.slice() : a.slice(1);
+        fs.forEach(function(f){ S.staged.splice(S.staged.indexOf(f), 1); uniqPush(S.work, [f]); });
+        return [{dim:"unstaged: " + fs.join(", ") + " (the change is still in your working directory)"}];
+      }
+      var gone = a[0] === "." ? S.work.slice() : a;
+      gone.forEach(function(f){ var i = S.work.indexOf(f); if(i < 0) E("error: '" + f + "' has no unstaged changes."); S.work.splice(i, 1); });
+      return [{err:"discarded working-directory changes to " + gone.join(", ") + ". This cannot be undone: it was never committed."}];
+    },
+    merge: function(a){
+      var noff = a.indexOf("--no-ff") >= 0; a = a.filter(function(x){ return x.charAt(0) !== "-"; });
+      if(!a[0]) E("fatal: no branch to merge. Try: git merge <branch>");
+      var t = need(a[0]), h = headId();
+      if(isAnc(t, h)) return ["Already up to date."];
+      if(isAnc(h, t) && !noff){
+        moveHead(t, "merge " + a[0] + ": Fast-forward");
+        return ["Updating " + h + ".." + t, {ok:"Fast-forward"}, {dim:"No merge commit needed: " + label() + " just slid forward to " + t + "."}];
+      }
+      var id = mk([h, t], "Merge branch '" + a[0] + "'" + (S.head.branch ? " into " + S.head.branch : ""), [], {merge:true});
+      moveHead(id, "merge " + a[0] + ": Merge made by the 'ort' strategy.");
+      return ["Merge made by the 'ort' strategy.", {ok:"[" + label() + " " + id + "] " + S.commits[id].msg}, {dim:"A three-way merge: the new commit " + id + " has two parents."}];
+    },
+    rebase: function(a){
+      var onto = null, args = [];
+      for(var i = 0; i < a.length; i++){ if(a[i] === "--onto") onto = a[++i]; else if(a[i].charAt(0) !== "-") args.push(a[i]); else E("error: unsupported option " + a[i]); }
+      if(!args[0]) E("fatal: no upstream given. Try: git rebase main");
+      if(args[1]){ git.switch([args[1]]); }
+      var up = need(args[0]), base = onto ? need(onto) : up, h = headId();
+      if(!onto && isAnc(h, up)){ moveHead(up, "rebase: fast-forward"); return [{ok:"Fast-forwarded " + label() + " to " + up + "."}]; }
+      if(!onto && isAnc(up, h)) return ["Current branch " + label() + " is up to date."];
+      var exclude = ancestors(up), list = [], c = h;
+      while(c && !exclude.has(c)){ if(S.commits[c].parents.length < 2) list.push(c); c = S.commits[c].parents[0]; }
+      list.reverse();
+      var tip = base, out = [];
+      list.forEach(function(old){
+        tip = mk([tip], S.commits[old].msg, S.commits[old].files, {from:old});
+        out.push({dim:"  replayed " + old + " → " + tip + "  " + S.commits[old].msg});
+      });
+      moveHead(tip, "rebase (finish): returning to " + label());
+      out.unshift({ok:"Successfully rebased and updated " + (S.head.branch ? "refs/heads/" + S.head.branch : "HEAD") + "."});
+      if(list.length) out.push({dim:"New ids: rebase copies commits. The originals are faded in the graph (git reflog still knows them)."});
+      return out;
+    },
+    "cherry-pick": function(a){
+      if(!a[0]) E("fatal: which commit? Try: git cherry-pick <id>");
+      var src = need(a[0]), h = headId();
+      if(isAnc(src, h)) E("error: " + src + " is already in this branch's history; nothing to pick.");
+      var id = mk([h], S.commits[src].msg, S.commits[src].files, {from:src});
+      moveHead(id, "cherry-pick: " + S.commits[src].msg);
+      return [{ok:"[" + label() + " " + id + "] " + S.commits[src].msg}, {dim:"A copy of " + src + " with a new id; the original is untouched."}];
+    },
+    reset: function(a){
+      var mode = "mixed", ref = "HEAD";
+      a.forEach(function(t){ if(t === "--soft" || t === "--mixed" || t === "--hard") mode = t.slice(2); else if(t.charAt(0) === "-") E("error: unsupported option " + t); else ref = t; });
+      var to = need(ref), from = headId();
+      moveHead(to, "reset: moving to " + ref);
+      var out = [];
+      if(mode === "soft"){ out.push({dim:"--soft: only the branch moved. Your staged changes are untouched."}); }
+      if(mode === "mixed"){ uniqPush(S.work, S.staged); S.staged = []; out.push({dim:"--mixed: branch moved and the staging area was reset; your edits are still in the working directory."}); }
+      if(mode === "hard"){ S.staged = []; S.work = []; out.push({hl:"HEAD is now at " + short(to)}); out.push({err:"--hard: working directory and staging wiped too."}); }
+      if(from !== to && !isAnc(from, to)) out.push({dim:"Commits after " + to + " are now unreachable (faded). git reflog can still find them."});
+      return out;
+    },
+    revert: function(a){
+      if(!a[0]) E("fatal: which commit? Try: git revert <id>");
+      var t = need(a.filter(function(x){ return x.charAt(0) !== "-"; })[0]), h = headId();
+      if(!isAnc(t, h)) E("error: " + t + " is not in the current branch, so there is nothing to revert.");
+      if(S.commits[t].parents.length > 1) E("error: " + t + " is a merge; this playground only reverts normal commits.");
+      var id = mk([h], 'Revert "' + S.commits[t].msg + '"', S.commits[t].files, {revertOf:t});
+      moveHead(id, "revert: " + S.commits[id].msg);
+      return [{ok:"[" + label() + " " + id + "] " + S.commits[id].msg}, {dim:"History was not rewritten: a new commit undoes " + t + "."}];
+    },
+    log: function(a){
+      var oneline = true, all = a.indexOf("--all") >= 0;
+      var ref = a.filter(function(x){ return x.charAt(0) !== "-"; })[0];
+      var ids;
+      if(all){ var r = reachable(); ids = S.order.filter(function(id){ return r.has(id); }).reverse(); }
+      else ids = Array.from(ancestors(ref ? need(ref) : headId())).sort(function(x, y){ return S.commits[y].col - S.commits[x].col; });
+      return ids.slice(0, 40).map(function(id){
+        var refs = refsAt(id);
+        return [{hl:id}, " " + (refs.length ? "(" + refs.join(", ") + ") " : "") + S.commits[id].msg];
+      });
+    },
+    reflog: function(){
+      return S.reflog.slice(0, 30).map(function(e, i){ return [{hl:e.id}, " HEAD@{" + i + "}: " + e.why]; });
+    },
+    show: function(a){
+      var id = need(a[0] || "HEAD"), c = S.commits[id];
+      return [{hl:"commit " + id + (refsAt(id).length ? " (" + refsAt(id).join(", ") + ")" : "")},
+        c.parents.length > 1 ? "Merge: " + c.parents.join(" ") : (c.parents[0] ? "Parent: " + c.parents[0] : "(root commit)"),
+        "", "    " + c.msg, "", c.files.length ? " files: " + c.files.join(", ") : {dim:" (no files)"}];
+    },
+    tag: function(a){
+      if(!a.length) return Object.keys(S.tags).sort().map(function(t){ return t; });
+      if(a[0] === "-d"){ if(!S.tags[a[1]]) E("error: tag '" + a[1] + "' not found."); delete S.tags[a[1]]; return ["Deleted tag '" + a[1] + "'"]; }
+      var name = a.filter(function(x){ return x.charAt(0) !== "-"; })[0];
+      var mi = a.indexOf("-m"); var rest = a.filter(function(x, i){ return x.charAt(0) !== "-" && i !== mi + 1; });
+      if(!validName(name)) E("fatal: '" + name + "' is not a valid tag name.");
+      if(S.tags[name]) E("fatal: tag '" + name + "' already exists");
+      S.tags[name] = rest[1] ? need(rest[1]) : headId();
+      return [{dim:"tagged " + S.tags[name] + " as " + name}];
+    },
+    stash: function(a){
+      var sub = a[0] || "push";
+      if(sub === "push" || sub === "save" || sub === "-u" || sub === "--include-untracked"){
+        if(!S.work.length && !S.staged.length) return ["No local changes to save"];
+        S.stash.unshift({work:S.work.slice(), staged:S.staged.slice(), on:label(), at:headId()});
+        S.work = []; S.staged = []; S.stashUsed = true;
+        return ["Saved working directory and index state WIP on " + S.stash[0].on + ": " + short(S.stash[0].at), {dim:"Your working directory is clean again. The change is on the stash shelf."}];
+      }
+      if(sub === "list") return S.stash.length ? S.stash.map(function(s, i){ return "stash@{" + i + "}: WIP on " + s.on + ": " + short(s.at); }) : [{dim:"(stash is empty)"}];
+      if(sub === "pop" || sub === "apply"){
+        if(!S.stash.length) E("error: No stash entries found.");
+        var s = sub === "pop" ? S.stash.shift() : S.stash[0];
+        uniqPush(S.work, s.work.concat(s.staged));
+        var out = git.status([]);
+        if(sub === "pop") out.push({dim:"Dropped stash@{0}"});
+        return out;
+      }
+      if(sub === "drop"){ if(!S.stash.length) E("error: No stash entries found."); S.stash.shift(); return ["Dropped stash@{0}"]; }
+      if(sub === "clear"){ S.stash = []; return [{dim:"stash cleared"}]; }
+      E("error: unknown stash subcommand '" + sub + "'");
+    },
+    init: function(){ E("This playground already is a repository. Type restart to start the challenge over."); }
+  };
+  git.ci = git.commit; git.co = git.checkout; git.st = git.status; git.br = git.branch;
+
+  function label(){ return S.head.branch || "HEAD"; }
+  var prevBranch = null;
+  function attach(name, msg){
+    var cur = label(); S.head = {branch:name}; if(cur !== name) prevBranch = cur;
+    S.reflog.unshift({id:headId(), why:"checkout: moving from " + cur + " to " + name});
+    var out = [msg];
+    if(S.work.length || S.staged.length) out.push({dim:"(your uncommitted changes came with you: switching branches carries them along)"});
+    return out;
+  }
+  function detach(id){
+    var cur = label(); if(S.head.branch) prevBranch = S.head.branch;
+    S.head = {id:id};
+    S.reflog.unshift({id:id, why:"checkout: moving from " + cur + " to " + id});
+    return [{hl:"You are in 'detached HEAD' state."}, "HEAD is now at " + short(id),
+      {dim:"New commits here belong to no branch. Use git switch -c <name> to keep them, or git switch <branch> to go back."}];
+  }
+  function switchBack(){ if(!prevBranch || !S.branches[prevBranch]) E("error: no previous branch"); return attach(prevBranch, "Switched to branch '" + prevBranch + "'"); }
+
+  var HELP = [
+    {hl:"Files (to feel the three trees)"},
+    "  edit <file>              change a file in the working directory",
+    "  git add <file> | .       stage it        git restore --staged <file>  unstage",
+    "  git status · git diff · git diff --staged",
+    {hl:"Commits"},
+    "  git commit -m \"msg\"      git commit -am \"msg\"      git commit --amend",
+    {hl:"Branches"},
+    "  git branch [name]        git switch <name>        git switch -c <name>",
+    "  git checkout <name|id>   git branch -d <name>     git switch --detach <id>",
+    {hl:"Combining"},
+    "  git merge <branch> [--no-ff]     git rebase <branch>     git rebase --onto <new> <old>",
+    "  git cherry-pick <id>",
+    {hl:"Undoing"},
+    "  git reset --soft|--mixed|--hard <ref>     git revert <id>     git reflog",
+    "  git stash · git stash pop · git stash list",
+    {hl:"Looking"},
+    "  git log [--all] · git show <ref> · git tag <name> [ref]",
+    {dim:"Refs: branch names, tags, ids (first 4+ chars), HEAD, HEAD~2, main^"},
+    {hl:"Playground"},
+    "  hint · restart · clear · help"
+  ];
+
+  // ================================================================ challenges
+  function msgs(b){ var t = S.branches[b]; return t ? Array.from(ancestors(t)).map(function(id){ return S.commits[id].msg; }) : []; }
+  function tipMsg(b){ var t = S.branches[b]; return t ? S.commits[t].msg : null; }
+  function chainLen(b){ return S.branches[b] ? firstParentChain(S.branches[b]).length : 0; }
+  function hasMerge(id){ return Array.from(ancestors(id)).some(function(c){ return S.commits[c].parents.length > 1; }); }
+
+  var CH = [
+    {id:"first-commits", mod:"00-how-to-read-this", title:"Make your first commits",
+      goal:"A repository is a chain of snapshots. Make <b>three new commits</b> on <code>main</code> and watch the chain grow.",
+      hint:"Run <code>git commit -m \"first\"</code> three times with different messages.",
+      chips:['git commit -m "first"','git log'],
+      setup:[], check:function(){ return chainLen("main") >= 4; }},
+    {id:"three-trees", mod:"01-three-trees", title:"Walk the three trees",
+      goal:"Move one change through all three trees: change <code>app.js</code> in the working directory, <b>stage</b> it, then <b>commit</b> it. Watch the panel on the right.",
+      hint:"<code>edit app.js</code>, then <code>git add app.js</code>, then <code>git commit -m \"add app\"</code>. Try <code>git status</code> between each step.",
+      chips:["edit app.js","git status","git add app.js",'git commit -m "add app"'],
+      setup:[], check:function(){ return Array.from(ancestors(S.branches.main)).some(function(id){ return S.commits[id].files.indexOf("app.js") >= 0; }) && !S.work.length && !S.staged.length; }},
+    {id:"branching", mod:"02-branching-basics", title:"Branch off and work",
+      goal:"Create a branch called <code>feature</code>, switch to it, and make <b>two commits</b> there. <code>main</code> must stay where it is.",
+      hint:"<code>git switch -c feature</code> creates and switches in one go. Then commit twice.",
+      chips:["git switch -c feature",'git commit -m "feature work"',"git branch"],
+      setup:['git commit -m "add README"'],
+      check:function(){ return S.branches.feature && S.head.branch === "feature" && tipMsg("main") === "add README" && chainLen("feature") - chainLen("main") >= 2 && isAnc(S.branches.main, S.branches.feature); }},
+    {id:"ff-merge", mod:"03-merging", title:"Fast-forward merge",
+      goal:"<code>feature</code> is two commits ahead of <code>main</code>, and <code>main</code> hasn't moved since. Bring the work into <code>main</code> <b>without creating a merge commit</b>.",
+      hint:"Be on the branch you're merging <i>into</i>: <code>git switch main</code>, then <code>git merge feature</code>.",
+      chips:["git switch main","git merge feature"],
+      setup:['git commit -m "base"',"git switch -c feature",'git commit -m "add login form"','git commit -m "validate input"',"git switch main"],
+      check:function(){ return S.branches.main === S.branches.feature && S.head.branch === "main" && !hasMerge(S.branches.main); }},
+    {id:"three-way", mod:"03-merging", title:"Three-way merge",
+      goal:"Both branches moved on, so <code>main</code> can't just slide forward. Merge <code>feature</code> into <code>main</code> and look at the new commit with <b>two parents</b>.",
+      hint:"<code>git merge feature</code> while on <code>main</code>.",
+      chips:["git merge feature","git log --all"],
+      setup:['git commit -m "base"',"git switch -c feature",'git commit -m "add search"',"git switch main",'git commit -m "fix footer"'],
+      check:function(){ var t = S.branches.main; return t && S.commits[t].parents.length === 2 && S.branches.feature && isAnc(S.branches.feature, t); }},
+    {id:"rebase", mod:"04-rebase", title:"Rebase for a straight line",
+      goal:"Same split history, different ending: <b>replay</b> <code>feature</code> on top of <code>main</code> so history is a straight line. Don't move <code>main</code>.",
+      hint:"<code>git switch feature</code>, then <code>git rebase main</code>. Notice the new commit ids: rebase makes copies.",
+      chips:["git switch feature","git rebase main"],
+      setup:['git commit -m "base"',"git switch -c feature",'git commit -m "add search"','git commit -m "search tests"',"git switch main",'git commit -m "fix footer"'],
+      check:function(){ return S.branches.feature && isAnc(S.branches.main, S.branches.feature) && !hasMerge(S.branches.feature) && tipMsg("main") === "fix footer" && msgs("feature").indexOf("search tests") >= 0; }},
+    {id:"restack", mod:"05-stacked-branches", title:"Restack a stacked branch",
+      goal:"<code>feature-b</code> was built on top of <code>feature-a</code>. Then <code>feature-a</code> got a review fix. Move <code>feature-b</code> so it sits on the <b>new</b> tip of <code>feature-a</code>.",
+      hint:"From <code>feature-b</code>: <code>git rebase feature-a</code>. The precise version is <code>git rebase --onto feature-a &lt;old-a-tip&gt;</code>.",
+      chips:["git log --all","git rebase feature-a"],
+      setup:['git commit -m "base"',"git switch -c feature-a",'git commit -m "A1 api"',"git switch -c feature-b",'git commit -m "B1 ui"',"git switch feature-a",'git commit -m "A2 review fix"',"git switch feature-b"],
+      check:function(){ return S.branches["feature-b"] && isAnc(S.branches["feature-a"], S.branches["feature-b"]) && tipMsg("feature-b") === "B1 ui"; }},
+    {id:"stash", mod:"06-stashing", title:"Stash for a hotfix",
+      goal:"You're halfway through editing <code>app.js</code> on <code>feature</code> when a bug report lands. <b>Shelve</b> the edit with stash, commit a hotfix on <code>main</code>, come back and <b>restore</b> your edit.",
+      hint:"<code>git stash</code> → <code>git switch main</code> → <code>git commit -m \"hotfix\"</code> → <code>git switch feature</code> → <code>git stash pop</code>.",
+      chips:["git stash","git switch main",'git commit -m "hotfix"',"git switch feature","git stash pop"],
+      setup:['git commit -m "base"',"git switch -c feature",'git commit -m "start dashboard"',"edit app.js"],
+      check:function(){ return S.stashUsed && !S.stash.length && S.head.branch === "feature" && (S.work.indexOf("app.js") >= 0 || S.staged.indexOf("app.js") >= 0) && chainLen("main") >= 3 &&
+        !Array.from(ancestors(S.branches.main)).some(function(id){ return S.commits[id].files.indexOf("app.js") >= 0; }); }},
+    {id:"cherry-pick", mod:"07-cherry-picking", title:"Cherry-pick one fix",
+      goal:"<code>feature</code> holds two experiments and one real fix. Get <b>only</b> the commit <code>fix typo in header</code> onto <code>main</code>.",
+      hint:"<code>git log feature</code> to find its id, then on <code>main</code>: <code>git cherry-pick &lt;id&gt;</code>.",
+      chips:["git log feature"],
+      setup:['git commit -m "base"',"git switch -c feature",'git commit -m "experiment 1"','git commit -m "fix typo in header"','git commit -m "experiment 2"',"git switch main"],
+      check:function(){ var m = msgs("main"); return m.indexOf("fix typo in header") >= 0 && m.indexOf("experiment 1") < 0 && m.indexOf("experiment 2") < 0; }},
+    {id:"reset", mod:"09-undoing-things", title:"Undo a local commit",
+      goal:"You just committed <code>oops: debug logs</code>. Nobody has pulled it yet. <b>Remove it</b> from <code>main</code>'s history.",
+      hint:"<code>git reset --hard HEAD~1</code> (or <code>--soft</code> to keep the changes staged). Watch the commit fade: it still exists, but nothing points at it.",
+      chips:["git reset --soft HEAD~1","git reset --hard HEAD~1"],
+      setup:['git commit -m "base"','git commit -m "oops: debug logs"'],
+      check:function(){ return msgs("main").indexOf("oops: debug logs") < 0 && chainLen("main") >= 2; }},
+    {id:"revert", mod:"09-undoing-things", title:"Undo a published commit safely",
+      goal:"<code>bad change</code> is already pushed (<code>origin/main</code>). Rewriting history would break your teammates. Undo it <b>by adding</b> a commit instead.",
+      hint:"<code>git log</code> to find the id of <code>bad change</code>, then <code>git revert &lt;id&gt;</code>.",
+      chips:["git log"],
+      setup:['git commit -m "base"','git commit -m "bad change"','git commit -m "good change"',"git branch origin/main"],
+      check:function(){ var t = S.branches.main; return t && S.commits[t].revertOf && S.commits[S.commits[t].revertOf].msg === "bad change" && S.branches["origin/main"] && isAnc(S.branches["origin/main"], t); }},
+    {id:"reflog", mod:"11-advanced-toolbox", title:"Rescue lost work with reflog",
+      goal:"Someone ran <code>git reset --hard</code> and the commit <code>important work</code> vanished from <code>main</code>. It isn't gone. <b>Get it back</b>.",
+      hint:"<code>git reflog</code> lists everywhere HEAD has been. Find the id, then <code>git reset --hard &lt;id&gt;</code>.",
+      chips:["git reflog"],
+      setup:['git commit -m "base"','git commit -m "important work"',"git reset --hard HEAD~1"],
+      check:function(){ return msgs("main").indexOf("important work") >= 0; }},
+    {id:"free", mod:null, title:"Free play",
+      goal:"An empty sandbox. Try anything: build a stack of branches, detach HEAD, tag a release, amend a commit. Type <code>help</code> for every command.",
+      hint:"Try: <code>git switch -c a</code>, commit, <code>git switch -c b</code>, commit, then <code>git switch main</code> and <code>git merge --no-ff a</code>.",
+      chips:["help","git log --all"], setup:[], check:null}
+  ];
+  var byId = {}; CH.forEach(function(c, i){ c.n = i + 1; byId[c.id] = c; });
+
+  // ================================================================ storage
+  function load(k, d){ try{ var v = localStorage.getItem("gvl:" + k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
+  function save(k, v){ try{ localStorage.setItem("gvl:" + k, JSON.stringify(v)); }catch(e){} }
+  var done = load("pg", {});
+
+  // ================================================================ UI
+  var $ = function(id){ return document.getElementById(id); };
+  var out = $("out"), input = $("cmd");
+  var cur = byId[new URLSearchParams(location.search).get("c")] || CH[0];
+  var won = false, seen = new Set(), hist = load("pg:hist", []), hpos = hist.length;
+
+  function print(line, cls){
+    var d = document.createElement("div");
+    if(Array.isArray(line)){ line.forEach(function(p){ d.appendChild(span(p)); }); }
+    else d.appendChild(span(line));
+    if(cls) d.className = cls;
+    out.appendChild(d);
+  }
+  function span(p){
+    var s = document.createElement("span");
+    if(typeof p === "string"){ s.textContent = p; return s; }
+    var k = Object.keys(p)[0]; s.className = k; s.textContent = p[k]; return s;
+  }
+
+  function startChallenge(c, keepUrl){
+    cur = c; won = !!done[c.id];
+    S = fresh(); prevBranch = null;
+    var root = mk([], "Initial commit", ["README.md"]);
+    S.branches.main = root; S.reflog.unshift({id:root, why:"commit (initial): Initial commit"});
+    c.setup.forEach(function(line){ exec(line, true); });
+    seen = new Set(S.order);
+    out.innerHTML = "";
+    print({dim:"# " + c.n + ". " + c.title + "  —  type help to see every command"});
+    if(!keepUrl){ try{ window.history.replaceState(null, "", "playground.html?c=" + c.id); }catch(e){} }
+    renderTask(); renderList(); render();
+  }
+
+  function exec(line, silent){
+    var raw = line.trim(); if(!raw) return;
+    // allow  echo "x" > file  as an edit
+    var redirect = raw.match(/^echo\b.*>>?\s*(\S+)$/);
+    var t = redirect ? ["edit", redirect[1]] : tokenize(raw);
+    var res;
+    try{
+      if(t[0] === "git"){
+        var sub = t[1];
+        if(!sub || sub === "--help" || sub === "help") res = HELP;
+        else if(!git[sub]) E("git: '" + sub + "' is not supported in this playground. Type help for the list.");
+        else res = git[sub](t.slice(2));
+      } else if(t[0] === "edit" || t[0] === "touch" || t[0] === "vim" || t[0] === "nano" || t[0] === "code"){
+        if(!t[1]) E("usage: edit <file>");
+        t.slice(1).forEach(function(f){ uniqPush(S.work, [f]); });
+        res = [{dim:"edited " + t.slice(1).join(", ") + " (now a change in your working directory)"}];
+      } else if(t[0] === "help"){ res = HELP; }
+      else if(t[0] === "clear"){ out.innerHTML = ""; res = []; }
+      else if(t[0] === "hint"){ res = [[{hl:"hint: "}, stripTags(cur.hint)]]; }
+      else if(t[0] === "restart" || t[0] === "reset-playground"){ startChallenge(cur, true); return; }
+      else if(t[0] === "ls"){ res = ["README.md"].concat(S.work, S.staged).filter(function(v, i, a){ return a.indexOf(v) === i; }); }
+      else E(t[0] + ": command not found. Commands start with git (or edit <file>). Type help.");
+    }catch(e){
+      if(!e.git) { console.error(e); e = {message:"Something went wrong running that command."}; }
+      if(silent) throw new Error("setup failed: " + line + " → " + e.message);
+      res = [{err:e.message}];
+    }
+    if(silent) return;
+    (res || []).forEach(function(l){ print(l); });
+  }
+  function stripTags(h){ var d = document.createElement("div"); d.innerHTML = h; return d.textContent; }
+
+  function submit(line){
+    print([{p:"(" + label() + ") $ "}, line], "cmd");
+    if(line.trim()){ hist.push(line); hist = hist.slice(-60); save("pg:hist", hist); }
+    hpos = hist.length;
+    exec(line);
+    render();
+    if(cur.check && !won){
+      var ok = false; try{ ok = !!cur.check(); }catch(e){}
+      if(ok){
+        won = true; done[cur.id] = true; save("pg", done);
+        print({ok:"✔ Challenge complete! " + (nextOf(cur) ? "Next: " + nextOf(cur).title + "." : "")});
+        renderTask(); renderList();
+      }
+    }
+    out.scrollTop = out.scrollHeight;
+  }
+  function nextOf(c){ return CH[c.n] || null; }
+
+  function renderList(){
+    var l = $("clist"); l.innerHTML = "";
+    CH.forEach(function(c){
+      var b = document.createElement("button");
+      if(c === cur) b.className = "on";
+      b.innerHTML = '<span class="n">' + (c.check ? c.n : "∞") + '</span><span class="t">' + (done[c.id] ? "✓" : "") + "</span><span></span>";
+      b.lastChild.textContent = c.title;
+      b.onclick = function(){ startChallenge(c); input.focus(); };
+      l.appendChild(b);
+    });
+    var graded = CH.filter(function(c){ return c.check; }), n = graded.filter(function(c){ return done[c.id]; }).length;
+    $("trackBar").style.width = Math.round(100 * n / graded.length) + "%";
+    $("progTxt").textContent = n + " of " + graded.length + " challenges solved";
+    $("doneChip").innerHTML = "<b>" + n + "</b>/" + graded.length + " solved";
+  }
+  function renderTask(){
+    var c = cur, nx = nextOf(c);
+    var h = '<div class="kicker">' + (c.check ? "Challenge " + c.n + " of " + (CH.length - 1) : "Sandbox") +
+      (c.mod ? ' · <a href="learn.html?m=' + c.mod + '">read the module</a>' : "") + "</div>" +
+      "<h1></h1><p class=\"goal\">" + c.goal + "</p>" +
+      '<div class="row"><button class="btn" id="hintBtn">Show hint</button><button class="btn" id="restartBtn">↺ Restart</button>' +
+      (c.check ? '<span class="status' + (won ? " ok" : "") + '">' + (won ? "✓ solved" : "not solved yet") + "</span>" : "") + "</div>" +
+      '<div class="hint" id="hintBox" hidden>' + c.hint + "</div>";
+    if(won && c.check) h += '<div class="win"><span>✔ Solved. ' + (done[c.id] ? "Nice work." : "") + "</span>" +
+      (nx ? '<button class="btn" id="nextBtn">Next: ' + nx.title + " →</button>" : "") + "</div>";
+    $("task").innerHTML = h;
+    $("task").querySelector("h1").textContent = c.title;
+    $("hintBtn").onclick = function(){ var hb = $("hintBox"); hb.hidden = !hb.hidden; this.textContent = hb.hidden ? "Show hint" : "Hide hint"; };
+    $("restartBtn").onclick = function(){ startChallenge(cur, true); input.focus(); };
+    if($("nextBtn")) $("nextBtn").onclick = function(){ startChallenge(nx); input.focus(); };
+    var chips = $("chips"); chips.innerHTML = "";
+    (c.chips || []).forEach(function(cmd){
+      var b = document.createElement("button"); b.textContent = cmd; b.title = "Put this in the terminal";
+      b.onclick = function(){ input.value = cmd; input.focus(); };
+      chips.appendChild(b);
+    });
+  }
+
+  // ---------------------------------------------------------------- graph
+  var NS = "http://www.w3.org/2000/svg";
+  function el(tag, attrs, parent){ var e = document.createElementNS(NS, tag); for(var k in attrs) e.setAttribute(k, attrs[k]); if(parent) parent.appendChild(e); return e; }
+  function render(){
+    $("prompt").textContent = "(" + (S.head.branch || "HEAD " + S.head.id) + ") $";
+    $("headInfo").textContent = S.head.branch ? "HEAD → " + S.head.branch : "detached HEAD";
+    renderTrees();
+    var COLW = 78, LANEH = 92, PX = 46, PY = 74;
+    var reach = reachable(), hid = headId();
+    var lanes = S.maxLane + 1, cols = S.order.length;
+    var W = Math.max(PX * 2 + (cols - 1) * COLW + 40, 320), H = PY + (lanes - 1) * LANEH + 64;
+    var svg = el("svg", {width:W, height:H, viewBox:"0 0 " + W + " " + H, role:"img", "aria-label":"Commit graph"});
+    function pos(id){ var c = S.commits[id]; return [PX + c.col * COLW, PY + c.lane * LANEH]; }
+    // edges
+    S.order.forEach(function(id){
+      var c = S.commits[id], a = pos(id), live = reach.has(id);
+      c.parents.forEach(function(p, i){
+        var b = pos(p), col = LANE_COLORS[(i === 0 ? c.lane : S.commits[p].lane) % LANE_COLORS.length];
+        var d = b[1] === a[1] ? "M" + b[0] + " " + b[1] + " L" + a[0] + " " + a[1]
+          : "M" + b[0] + " " + b[1] + " C" + (b[0] + COLW * .7) + " " + b[1] + " " + (a[0] - COLW * .7) + " " + a[1] + " " + a[0] + " " + a[1];
+        el("path", {d:d, fill:"none", stroke:live ? col : "#334155", "stroke-width":live ? 3 : 2, "stroke-dasharray":live ? "" : "4 4", opacity:live ? .9 : .7}, svg);
+      });
+    });
+    // nodes
+    S.order.forEach(function(id){
+      var c = S.commits[id], p = pos(id), live = reach.has(id), col = LANE_COLORS[c.lane % LANE_COLORS.length];
+      var g = el("g", {opacity:live ? 1 : .35}, svg);
+      var t = el("title", {}, g); t.textContent = id + "  " + c.msg + (live ? "" : "  (unreachable)");
+      var node = el("g", {"class":"node" + (seen.has(id) ? "" : " pop")}, g);
+      if(c.parents.length > 1) el("circle", {cx:p[0], cy:p[1], r:15, fill:"none", stroke:col, "stroke-width":1.5}, node);
+      el("circle", {cx:p[0], cy:p[1], r:11, fill:id === hid ? "#fbbf24" : "#0b1c2c", stroke:live ? col : "#64748b", "stroke-width":3}, node);
+      var tid = el("text", {x:p[0], y:p[1] + 28, "text-anchor":"middle", fill:"#94a3b8", "font-size":10.5, "font-family":"ui-monospace,Menlo,monospace"}, g);
+      tid.textContent = id;
+      var tm = el("text", {x:p[0], y:p[1] + 41, "text-anchor":"middle", fill:"#64748b", "font-size":9.5, "font-family":"system-ui,sans-serif"}, g);
+      tm.textContent = c.msg.length > 13 ? c.msg.slice(0, 12) + "…" : c.msg;
+      // labels
+      var labels = [];
+      Object.keys(S.branches).sort().forEach(function(b){ if(S.branches[b] === id) labels.push({t:b, kind:b.indexOf("/") > 0 ? "remote" : "branch", head:S.head.branch === b}); });
+      Object.keys(S.tags).forEach(function(tg){ if(S.tags[tg] === id) labels.push({t:"🏷 " + tg, kind:"tag"}); });
+      if(!S.head.branch && S.head.id === id) labels.unshift({t:"HEAD", kind:"head"});
+      labels.forEach(function(L, i){
+        var y = p[1] - 24 - i * 21, txt = (L.head ? "HEAD → " : "") + L.t, w = txt.length * 6.6 + 14;
+        var colr = L.kind === "head" || L.head ? "#fbbf24" : L.kind === "tag" ? "#c084fc" : L.kind === "remote" ? "#94a3b8" : "#34d399";
+        el("rect", {x:p[0] - w / 2, y:y - 13, width:w, height:18, rx:9, fill:"#071320", stroke:colr, "stroke-width":1.4}, g);
+        var tx = el("text", {x:p[0], y:y, "text-anchor":"middle", fill:colr, "font-size":11, "font-weight":600, "font-family":"ui-monospace,Menlo,monospace"}, g);
+        tx.textContent = txt;
+      });
+    });
+    var box = $("graph"); box.innerHTML = ""; box.appendChild(svg);
+    box.scrollLeft = box.scrollWidth;
+    S.order.forEach(function(id){ seen.add(id); });
+  }
+  function renderTrees(){
+    function list(arr){ return arr.length ? arr.map(function(f){ return '<div class="f"></div>'; }).join("") : '<div class="none">clean</div>'; }
+    var h = headId(), c = S.commits[h];
+    var html = '<div class="tree w"><div class="lbl">Working directory</div>' + list(S.work) + "</div>" +
+      '<div class="arrow">git add ↓</div>' +
+      '<div class="tree s"><div class="lbl">Staging area</div>' + list(S.staged) + "</div>" +
+      '<div class="arrow">git commit ↓</div>' +
+      '<div class="tree r"><div class="lbl">Repository · HEAD</div><div class="f"></div></div>' +
+      '<div class="tree st"><div class="lbl">Stash</div>' + (S.stash.length ? "" : '<div class="none">empty</div>') + "</div>";
+    var tr = $("trees"); tr.innerHTML = html;
+    var fs = tr.querySelectorAll(".tree.w .f"); S.work.forEach(function(f, i){ fs[i].textContent = "✎ " + f; });
+    var ss = tr.querySelectorAll(".tree.s .f"); S.staged.forEach(function(f, i){ ss[i].textContent = "● " + f; });
+    tr.querySelector(".tree.r .f").textContent = h + " " + c.msg;
+    var st = tr.querySelector(".tree.st");
+    S.stash.forEach(function(s, i){ var d = document.createElement("div"); d.className = "f"; d.textContent = "stash@{" + i + "} " + s.work.concat(s.staged).join(", "); st.appendChild(d); });
+  }
+
+  // ---------------------------------------------------------------- input
+  input.addEventListener("keydown", function(e){
+    if(e.key === "Enter"){ var v = input.value; input.value = ""; submit(v); }
+    else if(e.key === "ArrowUp"){ if(hpos > 0){ hpos--; input.value = hist[hpos]; } e.preventDefault(); }
+    else if(e.key === "ArrowDown"){ if(hpos < hist.length - 1){ hpos++; input.value = hist[hpos]; } else { hpos = hist.length; input.value = ""; } e.preventDefault(); }
+  });
+  $("out").addEventListener("click", function(){ if(!getSelection().toString()) input.focus(); });
+
+  // test hook (used by automated checks; harmless for learners)
+  window.__pg = {run:function(l){ submit(l); }, start:function(id){ startChallenge(byId[id]); }, solved:function(){ return won; }, state:function(){ return S; }, ids:CH.map(function(c){ return c.id; })};
+
+  startChallenge(cur, true);
+  if(matchMedia("(min-width: 981px)").matches) input.focus();
+})();
+</script>
+</body>
+</html>

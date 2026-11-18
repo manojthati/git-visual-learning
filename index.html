@@ -3,7 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Learn Git Visually — gallery</title>
+<title>Learn Git — Visually</title>
+<meta name="description" content="Learn git with animated diagrams, eleven illustrated modules, self-graded flashcards and a hands-on git playground with twelve challenges.">
+<meta property="og:title" content="Learn Git — Visually">
+<meta property="og:description" content="Animated diagrams, eleven modules and a hands-on git playground.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://git-visual-learning.vercel.app/assets/infographic/course-map.svg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23071320'/%3E%3Cpath d='M10 7v18M10 16c0-5 12-4 12-9' stroke='%2338bdf8' stroke-width='2.6' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='10' cy='25' r='3.2' fill='%2334d399'/%3E%3Ccircle cx='22' cy='7' r='3.2' fill='%23fbbf24'/%3E%3C/svg%3E">
 <style>
   :root{
     --panel:#0b1c2c; --ink:#e2e8f0; --slate:#94a3b8; --cyan:#38bdf8;
@@ -43,6 +49,24 @@
   .legend{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin:18px 0 0;font-size:12px;color:var(--slate)}
   .legend span{display:inline-flex;align-items:center;gap:7px}
   .sw{width:11px;height:11px;border-radius:3px;display:inline-block}
+  .cta.go{background:var(--cyan);color:#071320;font-weight:700}
+  .cta.pg{border-color:var(--amber);color:var(--amber)}
+  .path{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+  .step{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--edge);border-radius:12px;
+    background:var(--card);text-decoration:none;color:var(--ink);transition:border-color .15s,transform .15s}
+  .step:hover{border-color:var(--cyan);transform:translateY(-2px)}
+  .step .num{font-size:12px;color:var(--cyan);border:1px solid var(--edge);border-radius:8px;padding:2px 7px;flex:none}
+  .step.done .num{color:#071320;background:var(--green);border-color:var(--green)}
+  .step b{display:block;font-size:13px}
+  .step small{color:var(--slate);font-size:11.5px;line-height:1.45;display:block;margin-top:3px}
+  .pgband{display:grid;grid-template-columns:1.1fr 1fr;gap:22px;align-items:center;padding:22px;border:1px solid rgba(251,191,36,.45);
+    border-radius:16px;background:linear-gradient(135deg,rgba(251,191,36,.08),rgba(56,189,248,.05))}
+  .pgband h3{margin:0 0 8px;font-size:20px;color:var(--amber)}
+  .pgband p{margin:0 0 14px;color:var(--slate);font-size:13px}
+  .pgband pre{margin:0;background:#050e18;border:1px solid var(--edge);border-radius:10px;padding:14px;font-size:12.5px;overflow:auto;color:var(--ink)}
+  .pgband pre .p{color:var(--green)} .pgband pre .o{color:var(--slate)}
+  #progline{color:var(--slate);font-size:12px;margin-top:14px}
+  @media (max-width:820px){ .pgband{grid-template-columns:1fr} }
   @media (max-width:520px){ .grid,.wide{grid-template-columns:1fr} }
 </style>
 </head>
@@ -51,8 +75,8 @@
 <header>
   <h1>Learn Git — Visually</h1>
   <p class="sub">Eleven modules, each one real-world analogy, then animated, then rated for risk.
-     Every picture on this page is a plain SVG with the animation written in CSS inside it —
-     no JavaScript, no dependencies, no build step.</p>
+     Every picture is a plain SVG animated with CSS: no plugins, nothing to install.
+     Then practise each idea in a live git playground.</p>
   <div class="stats">
     <div class="stat"><b>11</b> modules</div>
     <div class="stat"><b>20</b> animations</div>
@@ -61,9 +85,11 @@
     <div class="stat"><b>31</b> flashcards</div>
     <div class="stat"><b>24</b> quiz questions</div>
   </div>
-  <a class="cta" href="learn.html?m=00-how-to-read-this">Start reading →</a>
+  <a class="cta go" id="startBtn" href="learn.html?m=00-how-to-read-this">Start learning →</a>
+  <a class="cta pg" href="playground.html">🧪 Try the playground</a>
   <a class="cta alt" href="learn.html?m=cheatsheet-commands">Cheat sheet</a>
   <a class="cta alt" href="learn.html?m=quiz">Take the quiz</a>
+  <div id="progline"></div>
   <div class="legend">
     <span><i class="sw" style="background:#34d399"></i>at rest / safe</span>
     <span><i class="sw" style="background:#fbbf24"></i>active now</span>
@@ -74,6 +100,44 @@
 </header>
 
 <main>
+
+<section>
+  <h2>🧭 The course path</h2>
+  <p class="lede">Read a module, then practise it in the playground. Your progress is saved in this browser.</p>
+  <div class="path" id="path">
+    <a class="step" href="learn.html?m=00-how-to-read-this" data-m="00-how-to-read-this"><span class="num">00</span><span><b>How to read this</b><small>The method: analogy → animation → risk.</small></span></a>
+    <a class="step" href="learn.html?m=01-three-trees" data-m="01-three-trees"><span class="num">01</span><span><b>The Three Trees</b><small>Working dir, staging, repository.</small></span></a>
+    <a class="step" href="learn.html?m=02-branching-basics" data-m="02-branching-basics"><span class="num">02</span><span><b>Branching Basics</b><small>Branches are just movable labels.</small></span></a>
+    <a class="step" href="learn.html?m=03-merging" data-m="03-merging"><span class="num">03</span><span><b>Merging</b><small>Fast-forward vs. three-way.</small></span></a>
+    <a class="step" href="learn.html?m=04-rebase" data-m="04-rebase"><span class="num">04</span><span><b>Rebase</b><small>Replaying commits onto a new base.</small></span></a>
+    <a class="step" href="learn.html?m=05-stacked-branches" data-m="05-stacked-branches"><span class="num">05</span><span><b>Stacked Branches</b><small>Building and restacking a stack.</small></span></a>
+    <a class="step" href="learn.html?m=06-stashing" data-m="06-stashing"><span class="num">06</span><span><b>Stashing</b><small>Shelving work in progress.</small></span></a>
+    <a class="step" href="learn.html?m=07-cherry-picking" data-m="07-cherry-picking"><span class="num">07</span><span><b>Cherry-Picking</b><small>Copying one commit across.</small></span></a>
+    <a class="step" href="learn.html?m=08-branching-strategies" data-m="08-branching-strategies"><span class="num">08</span><span><b>Branching Strategies</b><small>Trunk-based, GitFlow and friends.</small></span></a>
+    <a class="step" href="learn.html?m=09-undoing-things" data-m="09-undoing-things"><span class="num">09</span><span><b>Undoing Things</b><small>Reset, revert, reflog.</small></span></a>
+    <a class="step" href="learn.html?m=10-remote-workflows" data-m="10-remote-workflows"><span class="num">10</span><span><b>Remote Workflows</b><small>Fetch, pull, push, upstreams.</small></span></a>
+    <a class="step" href="learn.html?m=11-advanced-toolbox" data-m="11-advanced-toolbox"><span class="num">11</span><span><b>The Advanced Toolbox</b><small>Bisect, worktrees, hooks and more.</small></span></a>
+  </div>
+</section>
+
+<section>
+  <div class="pgband">
+    <div>
+      <h3>🧪 Don't just read it. Type it.</h3>
+      <p>The playground is a git sandbox in your browser. Type real commands and watch the commit graph and the three trees change.
+         Twelve challenges take you from your first commit to rescuing lost work with <code>reflog</code>.</p>
+      <a class="cta pg" href="playground.html" style="margin:0">Open the playground →</a>
+      <span id="pgprog" style="color:var(--slate);font-size:12px;margin-left:10px"></span>
+    </div>
+<pre><span class="p">(main) $</span> git switch -c feature
+<span class="o">Switched to a new branch 'feature'</span>
+<span class="p">(feature) $</span> git commit -m "add search"
+<span class="o">[feature 6cb5983] add search</span>
+<span class="p">(feature) $</span> git rebase main
+<span class="o">Successfully rebased and updated refs/heads/feature.</span>
+<span style="color:var(--green)">✔ Challenge complete!</span></pre>
+  </div>
+</section>
 
 <section>
   <h2>Reference sheets</h2>
@@ -197,6 +261,26 @@
   <div>Learn Git — Visually · no dependencies · <a href="https://github.com/manojthati/git-visual-learning/blob/main/LICENSE">MIT licensed</a></div>
   <div style="margin-top:6px"><a href="https://github.com/manojthati/git-visual-learning">github.com/manojthati/git-visual-learning</a></div>
 </footer>
+
+<script>
+/* progress + "continue" (optional: the page works without it) */
+(function(){
+  function load(k, d){ try{ var v = localStorage.getItem("gvl:" + k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
+  var done = load("done", {}), last = load("last", null), pg = load("pg", {});
+  var steps = document.querySelectorAll("#path .step"), n = 0;
+  steps.forEach(function(a){ if(done[a.getAttribute("data-m")]){ a.classList.add("done"); n++; } });
+  var solved = Object.keys(pg).filter(function(k){ return pg[k]; }).length;
+  if(solved) document.getElementById("pgprog").textContent = solved + " of 12 challenges solved";
+  if(n || last){
+    var next = null;
+    for(var i = 0; i < steps.length; i++){ if(!done[steps[i].getAttribute("data-m")]){ next = steps[i]; break; } }
+    var target = last && !done[last] ? "learn.html?m=" + last : (next ? next.getAttribute("href") : "playground.html");
+    var b = document.getElementById("startBtn");
+    b.href = target; b.textContent = next ? "Continue learning →" : "Course complete · practise →";
+    document.getElementById("progline").textContent = n + " of 12 modules complete" + (solved ? " · " + solved + " playground challenges solved" : "");
+  }
+})();
+</script>
 
 </body>
 </html>

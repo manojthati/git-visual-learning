@@ -18,6 +18,9 @@ Every operation is shown as the real commands you'd type, with the key ones back
 [![Dependencies](https://img.shields.io/badge/dependencies-none-64748b?style=flat-square)](#no-dependencies)
 [![License](https://img.shields.io/badge/license-MIT-94a3b8?style=flat-square)](LICENSE)
 
+
+**▶ [Read it on the web](https://git-visual-learning.vercel.app)** · **🧪 [Try the git playground](https://git-visual-learning.vercel.app/playground.html)**: type real commands, watch the commit graph change, solve 12 challenges.
+
 </div>
 
 ---
