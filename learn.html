@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learn Git Visually — reader</title>
+<style>
+  :root{
+    --bg:#071320; --panel:#0b1c2c; --card:#0d2233; --ink:#e2e8f0; --slate:#94a3b8;
+    --cyan:#38bdf8; --amber:#fbbf24; --green:#34d399; --rose:#fb7185; --violet:#c084fc;
+    --edge:rgba(56,189,248,.25);
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-padding-top:70px}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.65}
+  a{color:var(--cyan)}
+
+  /* top bar */
+  .top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;
+    padding:10px 16px;background:rgba(7,19,32,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--edge);font-family:var(--mono);font-size:13px}
+  .top .home{color:var(--ink);text-decoration:none;font-weight:600;white-space:nowrap}
+  .top .spacer{flex:1}
+  .menu-btn{display:none;background:none;border:1px solid var(--edge);color:var(--ink);
+    border-radius:8px;padding:5px 10px;font:inherit;cursor:pointer}
+  .chip{border:1px solid var(--edge);border-radius:999px;padding:3px 12px;color:var(--slate);white-space:nowrap}
+  .chip b{color:var(--ink)}
+  .bar{position:absolute;left:0;bottom:-1px;height:2px;background:var(--cyan);width:0;transition:width .2s}
+
+  /* layout */
+  .wrap{display:grid;grid-template-columns:270px minmax(0,1fr);max-width:1280px;margin:0 auto}
+  nav.side{position:sticky;top:49px;align-self:start;height:calc(100vh - 49px);overflow:auto;
+    padding:22px 14px 40px;border-right:1px solid var(--edge);font-family:var(--mono);font-size:13px}
+  nav.side h3{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate);margin:18px 8px 8px}
+  nav.side h3:first-child{margin-top:0}
+  nav.side a{display:flex;gap:8px;align-items:baseline;padding:6px 8px;border-radius:7px;
+    color:var(--slate);text-decoration:none}
+  nav.side a:hover{background:var(--card);color:var(--ink)}
+  nav.side a.on{background:var(--card);color:var(--ink);box-shadow:inset 2px 0 0 var(--cyan)}
+  nav.side a .tick{width:14px;flex:none;color:var(--green)}
+  nav.side .prog{margin:4px 8px 0;color:var(--slate);font-size:12px}
+  nav.side .track{height:5px;border-radius:9px;background:var(--card);margin:6px 8px 0;overflow:hidden}
+  nav.side .track i{display:block;height:100%;background:var(--green);width:0;transition:width .3s}
+
+  main{padding:28px clamp(16px,4vw,56px) 90px;min-width:0}
+  article{max-width:860px}
+  article h1{font-size:clamp(26px,4vw,36px);line-height:1.2;margin:4px 0 18px;letter-spacing:-.5px}
+  article h2{font-size:20px;margin:42px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--edge)}
+  article h3{font-size:17px;margin:28px 0 10px}
+  article p,article li{color:#cbd5e1}
+  article strong{color:var(--ink)}
+  article hr{border:0;border-top:1px dashed var(--edge);margin:34px 0}
+  article img{max-width:100%;height:auto;display:block;margin:14px 0;border-radius:12px;
+    background:var(--panel);border:1px solid var(--edge)}
+  article blockquote{margin:18px 0;padding:12px 18px;border-left:3px solid var(--amber);
+    background:rgba(251,191,36,.06);border-radius:0 10px 10px 0}
+  article blockquote p{margin:6px 0}
+  article code{font-family:var(--mono);font-size:.88em;background:var(--card);padding:2px 6px;border-radius:5px;color:#e0f2fe}
+  article pre{position:relative;background:var(--panel);border:1px solid var(--edge);border-radius:10px;
+    padding:14px 16px;overflow:auto;font-size:13px;line-height:1.55}
+  article pre code{background:none;padding:0;color:#e2e8f0}
+  .copy{position:absolute;top:8px;right:8px;font:11px var(--mono);background:var(--card);color:var(--slate);
+    border:1px solid var(--edge);border-radius:6px;padding:3px 8px;cursor:pointer;opacity:.75}
+  .copy:hover{opacity:1;color:var(--ink)}
+  .tbl{overflow-x:auto;margin:14px 0}
+  article table{border-collapse:collapse;width:100%;font-size:14px}
+  article th,article td{border:1px solid var(--edge);padding:8px 10px;text-align:left;vertical-align:top}
+  article th{background:var(--card);color:var(--ink)}
+  .mermaid{background:var(--panel);border:1px solid var(--edge);border-radius:12px;padding:14px;
+    margin:14px 0;overflow-x:auto;text-align:center}
+
+  /* flashcards & answers */
+  article details{margin:12px 0;border:1px solid var(--edge);border-radius:12px;background:var(--card);overflow:hidden}
+  article details>summary{cursor:pointer;list-style:none;padding:13px 16px 13px 42px;position:relative;color:var(--ink);font-weight:500}
+  article details>summary::-webkit-details-marker{display:none}
+  article details>summary::before{content:"▸";position:absolute;left:17px;top:12px;color:var(--cyan);transition:transform .15s}
+  article details[open]>summary::before{transform:rotate(90deg)}
+  article details>summary:hover{background:rgba(56,189,248,.06)}
+  article details>:not(summary){padding:0 18px}
+  article details[open]{border-color:rgba(56,189,248,.5)}
+  .grade{display:flex;gap:8px;flex-wrap:wrap;padding:4px 18px 14px !important;font-family:var(--mono);font-size:12px}
+  .grade button{font:inherit;cursor:pointer;border-radius:8px;padding:6px 12px;background:transparent;border:1px solid var(--edge);color:var(--slate)}
+  .grade button.got.sel{border-color:var(--green);color:var(--green);background:rgba(52,211,153,.1)}
+  .grade button.miss.sel{border-color:var(--rose);color:var(--rose);background:rgba(251,113,133,.1)}
+  details.g-got{border-color:rgba(52,211,153,.55)}
+  details.g-miss{border-color:rgba(251,113,133,.55)}
+
+  .done-box{margin-top:40px;padding:18px;border:1px solid var(--edge);border-radius:14px;background:var(--card);
+    display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .btn{font:13px var(--mono);cursor:pointer;border-radius:9px;padding:9px 16px;border:1px solid var(--cyan);
+    background:transparent;color:var(--cyan);text-decoration:none;display:inline-block}
+  .btn.ok{border-color:var(--green);color:var(--green);background:rgba(52,211,153,.1)}
+  .pager{display:flex;justify-content:space-between;gap:12px;margin-top:22px;flex-wrap:wrap}
+  .pager a{flex:1 1 220px;padding:14px 16px;border:1px solid var(--edge);border-radius:12px;text-decoration:none;
+    color:var(--ink);background:var(--card)}
+  .pager a small{display:block;color:var(--slate);font-family:var(--mono);font-size:11px}
+  .pager a.next{text-align:right}
+  .src{margin-top:26px;font-size:12px;color:var(--slate);font-family:var(--mono)}
+  .loading,.err{color:var(--slate);font-family:var(--mono);padding:40px 0}
+
+  @media (max-width:860px){
+    .wrap{grid-template-columns:1fr}
+    .menu-btn{display:inline-block}
+    nav.side{position:fixed;left:0;top:49px;width:min(300px,85vw);background:var(--bg);z-index:15;
+      transform:translateX(-102%);transition:transform .2s;box-shadow:8px 0 30px rgba(0,0,0,.5)}
+    body.nav-open nav.side{transform:none}
+    .top .chip.score{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="top">
+  <button class="menu-btn" id="menuBtn" aria-label="Show modules">☰</button>
+  <a class="home" href="./">⎇ Learn Git — Visually</a>
+  <span class="spacer"></span>
+  <span class="chip score" id="scoreChip" hidden></span>
+  <span class="chip" id="progChip"></span>
+  <div class="bar" id="readBar"></div>
+</div>
+
+<div class="wrap">
+  <nav class="side" id="side" aria-label="Modules"></nav>
+  <main>
+    <article id="doc"><div class="loading">Loading…</div></article>
+    <div id="after"></div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>
+(function(){
+  var REPO = "https://github.com/manojthati/git-visual-learning/blob/main/";
+  var MODULES = [
+    ["00-how-to-read-this","00","How to read this"],
+    ["01-three-trees","01","The Three Trees"],
+    ["02-branching-basics","02","Branching Basics"],
+    ["03-merging","03","Merging"],
+    ["04-rebase","04","Rebase"],
+    ["05-stacked-branches","05","Stacked Branches"],
+    ["06-stashing","06","Stashing"],
+    ["07-cherry-picking","07","Cherry-Picking"],
+    ["08-branching-strategies","08","Branching Strategies"],
+    ["09-undoing-things","09","Undoing Things"],
+    ["10-remote-workflows","10","Remote Workflows"],
+    ["11-advanced-toolbox","11","The Advanced Toolbox"]
+  ];
+  var PRACTICE = [
+    ["flashcards","🃏","Flashcard deck"],
+    ["quiz","❓","Quiz bank"],
+    ["cheatsheet-commands","📋","Command cheat sheet"]
+  ];
+  var ALL = MODULES.concat(PRACTICE);
+  var known = {}; ALL.forEach(function(m){ known[m[0]] = m; });
+
+  // ---------- storage (best effort; page works without it)
+  function load(k, d){ try{ var v = localStorage.getItem("gvl:"+k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
+  function save(k, v){ try{ localStorage.setItem("gvl:"+k, JSON.stringify(v)); }catch(e){} }
+  var done = load("done", {});
+
+  var params = new URLSearchParams(location.search);
+  var slug = params.get("m") || MODULES[0][0];
+  if(!known[slug]) slug = MODULES[0][0];
+  var current = known[slug];
+
+  // ---------- sidebar
+  var side = document.getElementById("side");
+  function link(m, prefix){
+    var a = document.createElement("a");
+    a.href = "learn.html?m=" + m[0];
+    if(m[0] === slug) a.className = "on";
+    a.innerHTML = '<span class="tick">' + (done[m[0]] ? "✓" : "") + '</span><span>' +
+      (prefix ? prefix + " · " : "") + m[2] + '</span>';
+    return a;
+  }
+  function renderSide(){
+    side.innerHTML = "";
+    var h = document.createElement("h3"); h.textContent = "Modules"; side.appendChild(h);
+    MODULES.forEach(function(m){ side.appendChild(link(m, m[1])); });
+    var n = MODULES.filter(function(m){ return done[m[0]]; }).length;
+    var p = document.createElement("div"); p.className = "prog";
+    p.textContent = n + " of " + MODULES.length + " complete"; side.appendChild(p);
+    var t = document.createElement("div"); t.className = "track";
+    t.innerHTML = '<i style="width:' + Math.round(100*n/MODULES.length) + '%"></i>'; side.appendChild(t);
+    var h2 = document.createElement("h3"); h2.textContent = "Practice"; side.appendChild(h2);
+    PRACTICE.forEach(function(m){ side.appendChild(link(m, m[1])); });
+    document.getElementById("progChip").innerHTML = "<b>" + n + "</b>/" + MODULES.length + " done";
+  }
+  renderSide();
+  document.getElementById("menuBtn").onclick = function(){ document.body.classList.toggle("nav-open"); };
+  side.addEventListener("click", function(e){ if(e.target.closest("a")) document.body.classList.remove("nav-open"); });
+
+  // ---------- GitHub-style heading ids so in-page anchors (#level-1--recall) keep working
+  function ghSlug(text){
+    return text.trim().toLowerCase()
+      .replace(/<[^>]+>/g, "")
+      .replace(/[^\p{L}\p{N}\s_-]/gu, "")
+      .replace(/\s/g, "-");
+  }
+
+  // ---------- rewrite repo-relative links/images for the site
+  function rewrite(root){
+    root.querySelectorAll("img[src]").forEach(function(img){
+      var s = img.getAttribute("src");
+      if(s.indexOf("../assets/") === 0) img.setAttribute("src", s.slice(3));
+      img.loading = "lazy";
+    });
+    root.querySelectorAll("a[href]").forEach(function(a){
+      var h = a.getAttribute("href");
+      if(/^(https?:|mailto:|#)/.test(h)) { if(/^https?:/.test(h)){ a.target = "_blank"; a.rel = "noopener"; } return; }
+      var m = h.match(/^(?:\.\.\/docs\/|\.\/)?([\w-]+)\.md(#.*)?$/);
+      if(m && known[m[1]]) { a.setAttribute("href", "learn.html?m=" + m[1] + (m[2] || "")); return; }
+      if(/^\.\.\/README\.md/.test(h)) { a.setAttribute("href", "./"); return; }
+      // anything else (examples/, LICENSE…) lives only in the repo
+      a.setAttribute("href", REPO + h.replace(/^\.\.\//, "").replace(/^\.\//, "docs/"));
+      a.target = "_blank"; a.rel = "noopener";
+    });
+  }
+
+  // ---------- self-graded answers & flashcards
+  var score = load("score:" + slug, {});
+  var chip = document.getElementById("scoreChip");
+  function updateScore(total){
+    var got = 0, miss = 0;
+    Object.keys(score).forEach(function(k){ if(score[k] === "got") got++; else if(score[k] === "miss") miss++; });
+    if(!total){ chip.hidden = true; return; }
+    chip.hidden = false;
+    chip.innerHTML = "✓ <b>" + got + "</b> · ✗ <b>" + miss + "</b> · " + (total - got - miss) + " left";
+  }
+  function addGrading(root){
+    var cards = root.querySelectorAll("details");
+    cards.forEach(function(d, i){
+      var key = "c" + i;
+      var g = document.createElement("div"); g.className = "grade";
+      g.innerHTML = '<button class="got">✓ I knew it</button><button class="miss">✗ Missed it</button>';
+      d.appendChild(g);
+      function paint(){
+        var v = score[key];
+        d.classList.toggle("g-got", v === "got"); d.classList.toggle("g-miss", v === "miss");
+        g.querySelector(".got").classList.toggle("sel", v === "got");
+        g.querySelector(".miss").classList.toggle("sel", v === "miss");
+      }
+      g.addEventListener("click", function(e){
+        var b = e.target.closest("button"); if(!b) return;
+        var v = b.classList.contains("got") ? "got" : "miss";
+        score[key] = score[key] === v ? undefined : v;
+        if(!score[key]) delete score[key];
+        save("score:" + slug, score); paint(); updateScore(cards.length);
+      });
+      paint();
+    });
+    if(cards.length){
+      var reset = document.createElement("button");
+      reset.className = "btn"; reset.textContent = "Reset my answers";
+      reset.onclick = function(){ score = {}; save("score:" + slug, score); location.reload(); };
+      root.appendChild(reset);
+    }
+    updateScore(cards.length);
+  }
+
+  function addCopyButtons(root){
+    root.querySelectorAll("pre").forEach(function(pre){
+      var b = document.createElement("button"); b.className = "copy"; b.textContent = "copy";
+      b.onclick = function(){
+        var t = pre.querySelector("code").innerText;
+        (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(
+          function(){ b.textContent = "copied"; setTimeout(function(){ b.textContent = "copy"; }, 1200); },
+          function(){ b.textContent = "select & ⌘C"; });
+      };
+      pre.appendChild(b);
+    });
+  }
+
+  function footer(){
+    var after = document.getElementById("after");
+    var idx = MODULES.findIndex(function(m){ return m[0] === slug; });
+    var html = "";
+    if(idx >= 0){
+      html += '<div class="done-box"><span>' + (done[slug] ? "You've completed this module." : "Finished reading? Mark it done to track your progress.") +
+        '</span><button class="btn' + (done[slug] ? " ok" : "") + '" id="doneBtn">' + (done[slug] ? "✓ Completed" : "Mark module complete") + '</button></div>';
+      var prev = MODULES[idx-1], next = MODULES[idx+1] || PRACTICE[0];
+      html += '<div class="pager">' +
+        (prev ? '<a href="learn.html?m=' + prev[0] + '"><small>← previous</small>' + prev[1] + " · " + prev[2] + '</a>' : "<span></span>") +
+        '<a class="next" href="learn.html?m=' + next[0] + '"><small>next →</small>' + (next[1].length < 3 && /\d/.test(next[1]) ? next[1] + " · " : "") + next[2] + '</a></div>';
+    }
+    html += '<div class="src">Source: <a href="' + REPO + 'docs/' + slug + '.md" target="_blank" rel="noopener">docs/' + slug + '.md on GitHub</a></div>';
+    after.innerHTML = html;
+    var btn = document.getElementById("doneBtn");
+    if(btn) btn.onclick = function(){
+      if(done[slug]) delete done[slug]; else done[slug] = true;
+      save("done", done); renderSide(); footer();
+    };
+  }
+
+  // ---------- reading progress bar
+  addEventListener("scroll", function(){
+    var h = document.documentElement, max = h.scrollHeight - h.clientHeight;
+    document.getElementById("readBar").style.width = (max > 0 ? 100 * h.scrollTop / max : 0) + "%";
+  }, {passive:true});
+
+  // ---------- render
+  document.title = current[2] + " — Learn Git Visually";
+  var doc = document.getElementById("doc");
+  fetch("docs/" + slug + ".md").then(function(r){
+    if(!r.ok) throw new Error(r.status);
+    return r.text();
+  }).then(function(md){
+    // drop the in-file "⬅️ prev · index · next ➡️" line: the reader has its own pager
+    md = md.replace(/\n-{3,}\s*\n+⬅️[^\n]*\s*$/, "\n").replace(/\n⬅️[^\n]*\s*$/, "\n");
+    var renderer = new marked.Renderer();
+    renderer.heading = function(text, level, raw){
+      return "<h" + level + ' id="' + ghSlug(raw) + '">' + text + "</h" + level + ">\n";
+    };
+    renderer.code = function(code, lang){
+      if(lang === "mermaid") return '<div class="mermaid">' + code.replace(/</g,"&lt;") + "</div>";
+      var esc = code.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+      return '<pre><code class="language-' + (lang || "") + '">' + esc + "</code></pre>";
+    };
+    renderer.table = function(header, body){
+      return '<div class="tbl"><table><thead>' + header + "</thead><tbody>" + body + "</tbody></table></div>";
+    };
+    doc.innerHTML = marked.parse(md, {renderer: renderer, gfm: true});
+    rewrite(doc);
+    addCopyButtons(doc);
+    addGrading(doc);
+    footer();
+    try{
+      mermaid.initialize({startOnLoad:false, theme:"dark", securityLevel:"strict",
+        themeVariables:{background:"#0b1c2c", primaryColor:"#0f2438", lineColor:"#94a3b8", fontFamily:"ui-monospace,Menlo,monospace"}});
+      mermaid.run({querySelector:".mermaid"});
+    }catch(e){}
+    if(location.hash){ var t = document.getElementById(decodeURIComponent(location.hash.slice(1))); if(t) t.scrollIntoView(); }
+  }).catch(function(){
+    doc.innerHTML = '<div class="err">Couldn\'t load this module. <a href="' + REPO + "docs/" + slug + '.md">Read it on GitHub instead →</a></div>';
+  });
+})();
+</script>
+</body>
+</html>
