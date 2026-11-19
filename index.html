@@ -20,7 +20,7 @@
   *{box-sizing:border-box}
   body{margin:0;background:#071320;color:var(--ink);font-family:var(--mono);line-height:1.6}
   a{color:var(--cyan)}
-  header{padding:56px 24px 36px;text-align:center;border-bottom:1px solid var(--edge);
+  header{position:relative;padding:56px 24px 36px;text-align:center;border-bottom:1px solid var(--edge);
     background:radial-gradient(1200px 400px at 50% -120px,rgba(56,189,248,.12),transparent)}
   h1{margin:0 0 10px;font-size:clamp(24px,4vw,38px);letter-spacing:-.5px}
   .sub{color:var(--slate);font-size:14px;max-width:640px;margin:0 auto 22px}
@@ -73,6 +73,7 @@
 <body>
 
 <header>
+  <div data-account style="position:absolute;top:14px;right:16px"></div>
   <h1>Learn Git — Visually</h1>
   <p class="sub">Eleven modules, each one real-world analogy, then animated, then rated for risk.
      Every picture is a plain SVG animated with CSS: no plugins, nothing to install.
@@ -104,7 +105,7 @@
 
 <section>
   <h2>🧭 The course path</h2>
-  <p class="lede">Read a module, then practise it in the playground. Your progress is saved in this browser.</p>
+  <p class="lede">Read a module, then practise it in the playground. Your progress is saved in this browser; sign in with GitHub to keep it on every device.</p>
   <div class="path" id="path">
     <a class="step" href="learn.html?m=00-how-to-read-this" data-m="00-how-to-read-this"><span class="num">00</span><span><b>How to read this</b><small>The method: analogy → animation → risk.</small></span></a>
     <a class="step" href="learn.html?m=01-three-trees" data-m="01-three-trees"><span class="num">01</span><span><b>The Three Trees</b><small>Working dir, staging, repository.</small></span></a>

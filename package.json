@@ -1,0 +1,12 @@
+{
+  "name": "git-visual-learning",
+  "private": true,
+  "type": "module",
+  "description": "Static course site plus small serverless functions (api/) for optional GitHub sign-in and progress sync.",
+  "dependencies": {
+    "@vercel/blob": "2.8.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
