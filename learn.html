@@ -35,6 +35,7 @@
 
   /* layout */
   .wrap{display:grid;grid-template-columns:270px minmax(0,1fr);max-width:1280px;margin:0 auto}
+  @media (min-width:1150px){ .wrap{grid-template-columns:270px minmax(0,1fr) 230px} }
   nav.side{position:sticky;top:49px;align-self:start;height:calc(100vh - 49px);overflow:auto;
     padding:22px 14px 40px;border-right:1px solid var(--edge);font-family:var(--mono);font-size:13px}
   nav.side h3{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate);margin:18px 8px 8px}
@@ -74,6 +75,26 @@
   article th{background:var(--card);color:var(--ink)}
   .mermaid{background:var(--panel);border:1px solid var(--edge);border-radius:12px;padding:14px;
     margin:14px 0;overflow-x:auto;text-align:center}
+
+  /* per-module metadata badges, under h1 */
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 20px}
+  .badges .b{font:11px var(--mono);border:1px solid var(--edge);border-radius:999px;padding:4px 12px;
+    color:var(--slate);display:inline-flex;align-items:center;gap:5px;text-decoration:none;background:var(--card)}
+  .badges a.b{border-color:rgba(251,191,36,.45);color:var(--amber)}
+  .badges a.b:hover{background:rgba(251,191,36,.1)}
+
+  /* right-hand "on this page" toc */
+  aside.toc{display:none}
+  @media (min-width:1150px){
+    aside.toc{display:block;position:sticky;top:49px;align-self:start;height:calc(100vh - 49px);overflow:auto;
+      padding:28px 10px 40px 14px;font-family:var(--mono);font-size:12.5px;border-left:1px solid var(--edge)}
+    aside.toc h4{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--slate);margin:0 0 10px}
+    aside.toc a{display:block;padding:5px 10px;border-radius:7px;color:var(--slate);text-decoration:none;
+      border-left:2px solid transparent;line-height:1.4}
+    aside.toc a.h3{padding-left:22px;font-size:12px}
+    aside.toc a:hover{color:var(--ink)}
+    aside.toc a.on{color:var(--cyan);border-left-color:var(--cyan);background:rgba(56,189,248,.06)}
+  }
 
   /* flashcards & answers */
   article details{margin:12px 0;border:1px solid var(--edge);border-radius:12px;background:var(--card);overflow:hidden}
@@ -140,6 +161,7 @@
     <article id="doc"><div class="loading">Loading…</div></article>
     <div id="after"></div>
   </main>
+  <aside class="toc" id="toc" aria-label="On this page"></aside>
 </div>
 
 <script src="progress.js"></script>
@@ -292,6 +314,52 @@
     updateScore(cards.length);
   }
 
+  // ---------- metadata badges under h1 (real counts, not decoration)
+  function buildMeta(root){
+    var h1 = root.querySelector("h1");
+    if(!h1) return;
+    var sections = root.querySelectorAll("h2").length;
+    var blocks = root.querySelectorAll("pre").length;
+    var animated = !!root.querySelector(".mermaid, img[src*='assets/anim']");
+    var parts = [];
+    if(sections) parts.push('<span class="b">' + sections + " section" + (sections === 1 ? "" : "s") + "</span>");
+    if(blocks) parts.push('<span class="b">' + blocks + " command block" + (blocks === 1 ? "" : "s") + "</span>");
+    if(animated) parts.push('<span class="b">🎬 animated</span>');
+    if(TRY[slug]) parts.push('<a class="b" href="playground.html?c=' + TRY[slug][0] + '">🧪 practice included</a>');
+    if(!parts.length) return;
+    var row = document.createElement("div"); row.className = "badges"; row.innerHTML = parts.join("");
+    h1.insertAdjacentElement("afterend", row);
+  }
+
+  // ---------- right-hand "on this page" toc, scroll-spied
+  function buildToc(root){
+    var toc = document.getElementById("toc");
+    var heads = root.querySelectorAll("h2, h3");
+    toc.innerHTML = "";
+    if(!heads.length) return;
+    var h = document.createElement("h4"); h.textContent = "On this page"; toc.appendChild(h);
+    var links = [];
+    heads.forEach(function(el){
+      var a = document.createElement("a");
+      a.href = "#" + el.id;
+      a.textContent = el.textContent;
+      if(el.tagName === "H3") a.className = "h3";
+      a.dataset.target = el.id;
+      toc.appendChild(a);
+      links.push(a);
+    });
+    if(!("IntersectionObserver" in window)) return;
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(!en.isIntersecting) return;
+        links.forEach(function(l){ l.classList.remove("on"); });
+        var a = toc.querySelector('a[data-target="' + en.target.id + '"]');
+        if(a) a.classList.add("on");
+      });
+    }, {rootMargin: "-80px 0px -70% 0px"});
+    heads.forEach(function(el){ obs.observe(el); });
+  }
+
   function addCopyButtons(root){
     root.querySelectorAll("pre").forEach(function(pre){
       var b = document.createElement("button"); b.className = "copy"; b.textContent = "copy";
@@ -365,15 +433,17 @@
     };
     doc.innerHTML = marked.parse(md, {renderer: renderer, gfm: true});
     rewrite(doc);
+    buildMeta(doc);
     if(TRY[slug]){
       var pgDone = load("pg", {});
       var box = document.createElement("div"); box.className = "tryit";
       box.innerHTML = '<span><b>🧪 Try it yourself</b> · </span><a class="btn" href="playground.html?c=' + TRY[slug][0] + '">' +
         (pgDone[TRY[slug][0]] ? "✓ Solved · play again" : "Open the playground") + " →</a>";
       box.firstChild.appendChild(document.createTextNode(TRY[slug][1] + " in a live git sandbox."));
-      var h1 = doc.querySelector("h1");
-      if(h1 && h1.nextSibling) doc.insertBefore(box, h1.nextElementSibling); else doc.prepend(box);
+      var anchor = doc.querySelector(".badges") || doc.querySelector("h1");
+      if(anchor) anchor.insertAdjacentElement("afterend", box); else doc.prepend(box);
     }
+    buildToc(doc);
     addCopyButtons(doc);
     addGrading(doc);
     footer();
